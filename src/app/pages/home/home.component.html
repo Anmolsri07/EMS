@@ -1,1 +1,62 @@
-<h1>Home page</h1>
+<div class="container mt-5">
+  <!-- Welcome and User Info -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <h2>Welcome, {{ customer.fullName }}!</h2>
+      <p><strong>Account Number:</strong> {{ customer.accountNumber }}</p>
+      <p><strong>Current Billing Address:</strong> {{ customer.billingAddress }}</p>
+    </div>
+  </div>
+
+  <!-- Navigation to Key Features -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <h4>Navigate to Key Features:</h4>
+      <div class="btn-group">
+        <a href="view-bills" class="btn btn-primary">
+          <i class="bi bi-file-earmark-text"></i> View Bills
+        </a>
+        <a href="pay-bills" class="btn btn-success">
+          <i class="bi bi-credit-card"></i> Pay Bill
+        </a>
+        <a href="view-bills" class="btn btn-warning">
+          <i class="bi bi-clock-history"></i> Bill History
+        </a>
+        <a href="registration-complaint" class="btn btn-danger">
+          <i class="bi bi-exclamation-circle"></i> Register Complaint
+        </a>
+        <a href="view-customer-complaints" class="btn btn-info">
+          <i class="bi bi-search"></i> Complaint Status
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Current Bill Summary -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <h4>Current Bill Summary</h4>
+      <p><strong>Billing Period:</strong> {{ customer.currentBill.billingPeriod }}</p>
+      <p><strong>Due Date:</strong> {{ customer.currentBill.dueDate }}</p>
+      <p><strong>Amount Due:</strong> ${{ customer.currentBill.amountDue }}</p>
+
+      <!-- Conditional rendering based on whether the bill is unpaid -->
+      <button type="button" *ngIf="customer.currentBill.unpaid" class="btn btn-danger" [routerLink]="'/pay-bill'">Pay Now</button>
+    </div>
+  </div>
+
+  <!-- Profile and Account Settings -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <h4>Account Settings</h4>
+      <a href="/profile" class="btn btn-secondary">Profile / Account Settings</a>
+    </div>
+  </div>
+
+  <!-- Logout Button -->
+  <div class="row">
+    <div class="col-12">
+      <button (click)="logout()" class="btn btn-dark">Logout</button>
+    </div>
+  </div>
+</div>

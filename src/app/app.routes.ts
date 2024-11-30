@@ -33,11 +33,11 @@ export const routes: Routes = [
     component: PayBillComponent
   },
   {
-    path: 'registration-compolaint',
+    path: 'registration-complaint',
     component: RegisterComplaintsComponent
   },
   {
-    path: 'view-customer-conplaints',
+    path: 'view-customer-complaints',
     component: ViewComplaintsComponent
   },
   {
