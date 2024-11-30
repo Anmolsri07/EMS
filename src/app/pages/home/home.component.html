@@ -1,31 +1,33 @@
 <div class="container mt-5">
   <!-- Welcome and User Info -->
-  <div class="row mb-4">
+  <div class="row mb-5">
     <div class="col-12">
-      <h2>Welcome, {{ customer.fullName }}!</h2>
-      <p><strong>Account Number:</strong> {{ customer.accountNumber }}</p>
-      <p><strong>Current Billing Address:</strong> {{ customer.billingAddress }}</p>
+      <div class="card p-4 shadow-sm">
+        <h2 class="text-primary">Welcome, {{ customer.fullName }}!</h2>
+        <p><strong>Account Number:</strong> {{ customer.accountNumber }}</p>
+        <p><strong>Current Billing Address:</strong> {{ customer.billingAddress }}</p>
+      </div>
     </div>
   </div>
 
   <!-- Navigation to Key Features -->
-  <div class="row mb-4">
+  <div class="row mb-5">
     <div class="col-12">
-      <h4>Navigate to Key Features:</h4>
-      <div class="btn-group">
-        <a [routerLink]="'view-bills'" class="btn btn-primary">
+      <h4 class="text-secondary mb-3">Navigate to Key Features</h4>
+      <div class="btn-group btn-group-sm w-100">
+        <a [routerLink]="'view-bills'" class="btn btn-sm btn-outline-primary w-100 py-3 hover-effect">
           <i class="bi bi-file-earmark-text"></i> View Bills
         </a>
-        <a [routerLink]="'pay-bills'" class="btn btn-success">
+        <a [routerLink]="'pay-bills'" class="btn btn-sm btn-outline-success w-100 py-3 hover-effect">
           <i class="bi bi-credit-card"></i> Pay Bill
         </a>
-        <a [routerLink]="'view-bills'" class="btn btn-warning">
+        <a [routerLink]="'view-bills'" class="btn btn-sm btn-outline-warning w-100 py-3 hover-effect">
           <i class="bi bi-clock-history"></i> Bill History
         </a>
-        <a [routerLink]="'registration-complaint'" class="btn btn-danger">
+        <a [routerLink]="'registration-complaint'" class="btn btn-sm btn-outline-danger w-100 py-3 hover-effect">
           <i class="bi bi-exclamation-circle"></i> Register Complaint
         </a>
-        <a [routerLink]="'view-customer-complaints'" class="btn btn-info">
+        <a [routerLink]="'view-customer-complaints'" class="btn btn-sm btn-outline-info w-100 py-3 hover-effect">
           <i class="bi bi-search"></i> Complaint Status
         </a>
       </div>
@@ -33,30 +35,35 @@
   </div>
 
   <!-- Current Bill Summary -->
-  <div class="row mb-4">
+  <div class="row mb-5">
     <div class="col-12">
-      <h4>Current Bill Summary</h4>
-      <p><strong>Billing Period:</strong> {{ customer.currentBill.billingPeriod }}</p>
-      <p><strong>Due Date:</strong> {{ customer.currentBill.dueDate }}</p>
-      <p><strong>Amount Due:</strong> ${{ customer.currentBill.amountDue }}</p>
+      <div class="card p-4 shadow-sm">
+        <h4 class="text-dark">Current Bill Summary</h4>
+        <p><strong>Billing Period:</strong> {{ customer.currentBill.billingPeriod }}</p>
+        <p><strong>Due Date:</strong> {{ customer.currentBill.dueDate }}</p>
+        <p><strong>Amount Due:</strong> ${{ customer.currentBill.amountDue }}</p>
 
-      <!-- Conditional rendering based on whether the bill is unpaid -->
-      <button type="button" *ngIf="customer.currentBill.unpaid" class="btn btn-danger" [routerLink]="'/pay-bill'">Pay Now</button>
+        <!-- Conditional rendering based on whether the bill is unpaid -->
+        <button type="button" *ngIf="customer.currentBill.unpaid" class="btn btn-danger btn-block py-3">Pay Now</button>
+      </div>
     </div>
   </div>
 
   <!-- Profile and Account Settings -->
-  <div class="row mb-4">
+  <div class="row mb-5">
     <div class="col-12">
-      <h4>Account Settings</h4>
-      <a href="/profile" class="btn btn-secondary">Profile / Account Settings</a>
+      <div class="card p-4 shadow-sm">
+        <h4 class="text-dark">Account Settings</h4>
+        <a href="/profile" class="btn btn-outline-secondary btn-block py-3">Profile / Account Settings</a>
+      </div>
     </div>
   </div>
 
   <!-- Logout Button -->
   <div class="row">
     <div class="col-12">
-      <button (click)="logout()" class="btn btn-dark">Logout</button>
+      <button (click)="logout()" class="btn btn-dark btn-block py-3">Logout</button>
     </div>
   </div>
 </div>
+
