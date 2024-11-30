@@ -13,19 +13,19 @@
     <div class="col-12">
       <h4>Navigate to Key Features:</h4>
       <div class="btn-group">
-        <a href="view-bills" class="btn btn-primary">
+        <a [routerLink]="'view-bills'" class="btn btn-primary">
           <i class="bi bi-file-earmark-text"></i> View Bills
         </a>
-        <a href="pay-bills" class="btn btn-success">
+        <a [routerLink]="'pay-bills'" class="btn btn-success">
           <i class="bi bi-credit-card"></i> Pay Bill
         </a>
-        <a href="view-bills" class="btn btn-warning">
+        <a [routerLink]="'view-bills'" class="btn btn-warning">
           <i class="bi bi-clock-history"></i> Bill History
         </a>
-        <a href="registration-complaint" class="btn btn-danger">
+        <a [routerLink]="'registration-complaint'" class="btn btn-danger">
           <i class="bi bi-exclamation-circle"></i> Register Complaint
         </a>
-        <a href="view-customer-complaints" class="btn btn-info">
+        <a [routerLink]="'view-customer-complaints'" class="btn btn-info">
           <i class="bi bi-search"></i> Complaint Status
         </a>
       </div>
