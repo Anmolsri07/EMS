@@ -1,0 +1,22 @@
+/* bill.component.css */
+.card {
+  margin-bottom: 20px;
+}
+
+table th, table td {
+  text-align: center;
+}
+
+input[type="number"] {
+  width: 150px;
+  text-align: right;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
