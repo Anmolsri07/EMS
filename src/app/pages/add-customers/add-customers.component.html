@@ -1,1 +1,152 @@
-<p>add-customers works!</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-12 col-md-10">
+      <div class="card shadow-sm mb-5">
+        <div class="card-header bg-dark text-white text-center">
+          <h3>Add New Customer</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="addCustomerForm" (ngSubmit)="onSubmit()">
+            <!-- Full Name -->
+            <div class="mb-3">
+              <label for="fullName" class="form-label">Full Name</label>
+              <input
+                type="text"
+                id="fullName"
+                class="form-control"
+                formControlName="fullName"
+                placeholder="Enter full name"
+              />
+              <div
+                *ngIf="addCustomerForm.get('fullName')?.invalid && addCustomerForm.get('fullName')?.touched"
+                class="text-danger mt-1"
+              >
+                Full Name is required.
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div class="mb-3">
+              <label for="address" class="form-label">Address</label>
+              <textarea
+                id="address"
+                class="form-control"
+                formControlName="address"
+                placeholder="Enter address"
+              ></textarea>
+              <div
+                *ngIf="addCustomerForm.get('address')?.invalid && addCustomerForm.get('address')?.touched"
+                class="text-danger mt-1"
+              >
+                Address is required.
+              </div>
+            </div>
+
+            <!-- Consumer Number -->
+            <div class="mb-3">
+              <label for="consumerNumber" class="form-label">Consumer Number</label>
+              <input
+                type="text"
+                id="consumerNumber"
+                class="form-control"
+                formControlName="consumerNumber"
+                placeholder="Enter consumer number"
+              />
+              <div
+                *ngIf="addCustomerForm.get('consumerNumber')?.invalid && addCustomerForm.get('consumerNumber')?.touched"
+                class="text-danger mt-1"
+              >
+                Consumer Number is required (min 5 characters).
+              </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="mb-3">
+              <label for="phoneNumber" class="form-label">Phone Number</label>
+              <input
+                type="text"
+                id="phoneNumber"
+                class="form-control"
+                formControlName="phoneNumber"
+                placeholder="Enter phone number"
+              />
+              <div
+                *ngIf="addCustomerForm.get('phoneNumber')?.invalid && addCustomerForm.get('phoneNumber')?.touched"
+                class="text-danger mt-1"
+              >
+                Enter a valid phone number.
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                formControlName="email"
+                placeholder="Enter email"
+              />
+              <div
+                *ngIf="addCustomerForm.get('email')?.invalid && addCustomerForm.get('email')?.touched"
+                class="text-danger mt-1"
+              >
+                Enter a valid email address.
+              </div>
+            </div>
+
+            <!-- Customer Type -->
+            <div class="mb-3">
+              <label for="customerType" class="form-label">Customer Type</label>
+              <select
+                id="customerType"
+                class="form-select"
+                formControlName="customerType"
+              >
+                <option value="">Select Type</option>
+                <option value="Residential">Residential</option>
+                <option value="Commercial">Commercial</option>
+              </select>
+              <div
+                *ngIf="addCustomerForm.get('customerType')?.invalid && addCustomerForm.get('customerType')?.touched"
+                class="text-danger mt-1"
+              >
+                Customer Type is required.
+              </div>
+            </div>
+
+            <!-- User ID -->
+            <div class="mb-3">
+              <label for="userId" class="form-label">User ID</label>
+              <input
+                type="text"
+                id="userId"
+                class="form-control"
+                formControlName="userId"
+                placeholder="Enter user ID"
+              />
+              <div
+                *ngIf="addCustomerForm.get('userId')?.invalid && addCustomerForm.get('userId')?.touched"
+                class="text-danger mt-1"
+              >
+                User ID must be between 5 and 20 characters.
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="addCustomerForm.invalid"
+              >
+                Add Customer
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
