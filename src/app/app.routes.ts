@@ -10,6 +10,7 @@ import { AddCustomersComponent } from './pages/add-customers/add-customers.compo
 import { AddConsumerComponent } from './pages/add-consumer/add-consumer.component';
 import { UpdateConsumerComponent } from './pages/update-consumer/update-consumer.component';
 import { AddBillComponent } from './pages/add-bill/add-bill.component';
+import { BillHistoryComponent } from './pages/bill-history/bill-history.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,10 @@ export const routes: Routes = [
   {
     path: 'pay-bills',
     component: PayBillComponent
+  },
+  {
+    path: 'bill-history',
+    component: BillHistoryComponent
   },
   {
     path: 'registration-complaint',
