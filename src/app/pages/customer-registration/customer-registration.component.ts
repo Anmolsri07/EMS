@@ -1,83 +1,87 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
+import { ICustomers } from '../../interfaces/customer';
 
 @Component({
   selector: 'app-customer-registration',
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './customer-registration.component.html',
-  styleUrl: './customer-registration.component.scss',
+  styleUrls: ['./customer-registration.component.scss'],
 })
 export class CustomerRegistrationComponent {
-  registrationForm: FormGroup;
+  registrationForm: FormGroup<{
+    [key in keyof ICustomers]: FormControl<ICustomers>;
+  }>;
 
   constructor(private fb: FormBuilder) {
     this.registrationForm = this.fb.group(
       {
-        consumerNumber: [
-          '',
-          [Validators.required, Validators.pattern(/^\d{13}$/)],
-        ],
-        fullName: [
-          '',
-          [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)],
-        ],
-        address: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        mobileNumber: [
-          '',
-          [Validators.required, Validators.pattern(/^\d{10}$/)],
-        ],
-        customerType: ['', Validators.required],
-        userId: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(5),
-            Validators.maxLength(20),
-          ],
-        ],
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern(
-              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
-            ),
-          ],
-        ],
-        confirmPassword: ['', Validators.required],
+        consumerNumber: new FormControl('', [
+          Validators.required,
+          Validators.pattern(/^\d{13}$/),
+        ]),
+        fullName: new FormControl('', [
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z\s]+$/),
+        ]),
+        address: new FormControl('', Validators.required),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        mobileNumber: new FormControl('', [
+          Validators.required,
+          Validators.pattern(/^\d{10}$/),
+        ]),
+        customerType: new FormControl('', Validators.required),
+        userId: new FormControl('', [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(20),
+        ]),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.pattern(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+          ),
+        ]),
+        confirmPassword: new FormControl('', Validators.required),
       },
       { validators: this.passwordMatchValidator }
     );
   }
 
-  get consumerNumber() {
-    return this.registrationForm.get('consumerNumber');
+  get consumerNumber(): AbstractControl {
+    return this.registrationForm.get('consumerNumber')!;
   }
-  get fullName() {
-    return this.registrationForm.get('fullName');
+  get fullName(): AbstractControl {
+    return this.registrationForm.get('fullName')!;
   }
-  get address() {
-    return this.registrationForm.get('address');
+  get address(): AbstractControl {
+    return this.registrationForm.get('address')!;
   }
-  get email() {
-    return this.registrationForm.get('email');
+  get email(): AbstractControl {
+    return this.registrationForm.get('email')!;
   }
-  get mobileNumber() {
-    return this.registrationForm.get('mobileNumber');
+  get mobileNumber(): AbstractControl {
+    return this.registrationForm.get('mobileNumber')!;
   }
-  get customerType() {
-    return this.registrationForm.get('customerType');
+  get customerType(): AbstractControl {
+    return this.registrationForm.get('customerType')!;
   }
-  get userId() {
-    return this.registrationForm.get('userId');
+  get userId(): AbstractControl {
+    return this.registrationForm.get('userId')!;
   }
-  get password() {
-    return this.registrationForm.get('password');
+  get password(): AbstractControl {
+    return this.registrationForm.get('password')!;
   }
-  get confirmPassword() {
-    return this.registrationForm.get('confirmPassword');
+  get confirmPassword(): AbstractControl {
+    return this.registrationForm.get('confirmPassword')!;
   }
 
   passwordMatchValidator(group: FormGroup) {
@@ -88,7 +92,11 @@ export class CustomerRegistrationComponent {
 
   onSubmit() {
     if (this.registrationForm.valid) {
-      const { fullName, email } = this.registrationForm.value;
+      const { fullName, email, password, confirmPassword } = this.registrationForm.value;
+      if(password !== confirmPassword) {
+        alert('Confirm your password?')
+        return;
+      }
       alert(`Registration Successful!\n\nName: ${fullName}\nEmail: ${email}`);
     }
   }

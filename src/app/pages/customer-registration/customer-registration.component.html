@@ -80,8 +80,8 @@
       <label class="form-label">Customer Type</label>
       <select class="form-select" formControlName="customerType" title="Customer type">
         <option value="">Select</option>
-        <option value="Residential">Residential</option>
-        <option value="Commercial">Commercial</option>
+        <option value="residential">Residential</option>
+        <option value="commercial">Commercial</option>
       </select>
       <div *ngIf="customerType?.hasError('required') && (customerType?.dirty || customerType?.touched)" class="text-danger">
         <small>Customer Type is required.</small>
