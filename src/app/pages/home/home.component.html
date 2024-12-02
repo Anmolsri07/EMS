@@ -1,6 +1,17 @@
 <div class="container mt-5">
   <!-- Welcome and User Info -->
   <div class="row mb-5">
+    <nav class="navbar">
+      <ul>
+        <li><a [routerLink]="'view-bills'">View Bill</a></li>
+        <li><a [routerLink]="'pay-bills'">Pay Bill</a></li>
+        <li><a [routerLink]="'bill-history'">Bill History</a></li>
+        <li><a [routerLink]="'view-customer-complaints'">Complaint Status</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="row mb-5">
+
     <div class="col-12">
       <div class="card p-4 shadow-sm">
         <h2 class="text-primary">Welcome, {{ customer.fullName }}!</h2>
@@ -11,10 +22,10 @@
   </div>
 
   <!-- Navigation to Key Features -->
-  <div class="row mb-5">
+  <!-- <div class="row mb-5">
     <div class="col-12">
-      <h4 class="text-secondary mb-3">Navigate to Key Features</h4>
-      <div class="btn-group btn-group-sm w-100">
+      <h4 class="text-secondary mb-3"></h4>
+      <div class="nav btn-group btn-group-sm w-100">
         <a [routerLink]="'view-bills'" class="btn btn-sm btn-outline-primary w-100 py-3 hover-effect">
           <i class="bi bi-file-earmark-text"></i> View Bills
         </a>
@@ -32,7 +43,7 @@
         </a>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Current Bill Summary -->
   <div class="row mb-5">
@@ -66,4 +77,3 @@
     </div>
   </div>
 </div>
-

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
-import {CommonModule} from '@angular/common'
+import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'app-home',
@@ -12,7 +12,7 @@ export class HomeComponent {
   customer = {
     fullName: 'Anmol sri',
     accountNumber: '6205357513',
-    billingAddress: 'Anmol Chapri gali dumka jharkhand',
+    billingAddress: 'street no 2 ',
     currentBill: {
       billingPeriod: 'October 2024',
       dueDate: '2024-11-30',
