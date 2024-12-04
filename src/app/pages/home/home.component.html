@@ -55,7 +55,7 @@
         <p><strong>Amount Due:</strong> ${{ customer.currentBill.amountDue }}</p>
 
         <!-- Conditional rendering based on whether the bill is unpaid -->
-        <button type="button" *ngIf="customer.currentBill.unpaid" class="btn btn-danger btn-block py-3">Pay Now</button>
+        <button type="button" *ngIf="customer.currentBill.unpaid" class="btn  btn-danger">Pay Now</button>
       </div>
     </div>
   </div>
@@ -65,7 +65,7 @@
     <div class="col-12">
       <div class="card p-4 shadow-sm">
         <h4 class="text-dark">Account Settings</h4>
-        <a href="/profile" class="btn btn-outline-secondary btn-block py-3">Profile / Account Settings</a>
+        <a href="/profile" class="btn btn-outline-secondary">Profile / Account Settings</a>
       </div>
     </div>
   </div>
@@ -73,7 +73,7 @@
   <!-- Logout Button -->
   <div class="row">
     <div class="col-12">
-      <button (click)="logout()" class="btn btn-dark btn-block py-3">Logout</button>
+      <button (click)="logout()" class="btn btn-dark btn-block">Logout</button>
     </div>
   </div>
 </div>
