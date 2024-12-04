@@ -13,67 +13,81 @@ import { AddBillComponent } from './pages/add-bill/add-bill.component';
 import { BillHistoryComponent } from './pages/bill-history/bill-history.component';
 import { LoginComponent } from './pages/login/login.component';
 import { unprotectedGuard } from './guard/unprotected.guard';
+import { protectedGuard } from './guard/protected.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [protectedGuard],
   },
   {
     path: 'customer-registration',
     component: CustomerRegistrationComponent,
-    canActivate: [unprotectedGuard]
+    canActivate: [unprotectedGuard],
   },
   {
     path: 'view-bills',
-    component: ViewBillsComponent
+    component: ViewBillsComponent,
+    canActivate: [protectedGuard],
   },
   {
     path: 'view-bill-summary',
-    component: ViewBillSummaryComponent
+    component: ViewBillSummaryComponent,
+    canActivate: [protectedGuard],
   },
   {
     path: 'pay-bills',
-    component: PayBillComponent
+    component: PayBillComponent,
+    canActivate: [protectedGuard],
   },
   {
     path: 'bill-history',
-    component: BillHistoryComponent
+    component: BillHistoryComponent,
+    canActivate: [protectedGuard],
   },
   {
     path: 'registration-complaint',
-    component: RegisterComplaintsComponent
+    component: RegisterComplaintsComponent,
+    canActivate: [protectedGuard],
   },
   {
     path: 'view-customer-complaints',
-    component: ViewComplaintsComponent
+    component: ViewComplaintsComponent,
+    canActivate: [protectedGuard],
   },
   {
     path: 'add-customer',
-    component: AddCustomersComponent
+    component: AddCustomersComponent,
+    canActivate: [protectedGuard],
   },
   {
     path: 'add-consumer',
-    component: AddConsumerComponent
+    component: AddConsumerComponent,
+    canActivate: [protectedGuard],
   },
   {
     path: 'update-consumer',
-    component: UpdateConsumerComponent
+    component: UpdateConsumerComponent,
+    canActivate: [protectedGuard],
   },
   {
     path: 'add-bills',
-    component: AddBillComponent
+    component: AddBillComponent,
+    canActivate: [protectedGuard],
   },
   {
     path: 'view-bills',
-    component: ViewBillsComponent
+    component: ViewBillsComponent,
+    canActivate: [protectedGuard],
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [unprotectedGuard],
   },
   {
     path: '**',
-    redirectTo: ''
-  }
+    redirectTo: '',
+  },
 ];
