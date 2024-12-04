@@ -11,6 +11,7 @@ import { AddConsumerComponent } from './pages/add-consumer/add-consumer.componen
 import { UpdateConsumerComponent } from './pages/update-consumer/update-consumer.component';
 import { AddBillComponent } from './pages/add-bill/add-bill.component';
 import { BillHistoryComponent } from './pages/bill-history/bill-history.component';
+import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
   {
@@ -64,6 +65,10 @@ export const routes: Routes = [
   {
     path: 'view-bills',
     component: ViewBillsComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: '**',
