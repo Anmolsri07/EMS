@@ -3,9 +3,20 @@ export enum CustomerType {
   COMMERCIAL = 'commercial',
 }
 
+export enum UserType {
+  ADMIN = 'admin',
+  CUSTOMER = 'customer'
+}
+
+export interface ILogin {
+  username: string;
+  password: string;
+}
+
+
 export interface ICustomers {
-  consumerNumber: number;
-  fullName: string;
+  customerId: number;
+  name: string;
   address: string;
   email: string;
   mobileNumber: string;

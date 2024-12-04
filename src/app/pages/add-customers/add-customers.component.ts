@@ -14,9 +14,9 @@ export class AddCustomersComponent {
 
   constructor(private fb: FormBuilder) {
     this.addCustomerForm = this.fb.group({
-      fullName: ['', Validators.required],
+      name: ['', Validators.required],
       address: ['', Validators.required],
-      consumerNumber: ['', [Validators.required, Validators.minLength(5)]],
+      customerId: ['', [Validators.required, Validators.minLength(5)]],
       phoneNumber: [
         '',
         [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)],

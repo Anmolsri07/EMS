@@ -4,21 +4,21 @@
 
     <!-- Consumer Number -->
     <div class="mb-3">
-      <label for="consumerNumber" class="form-label">Consumer Number</label>
-      <input type="text" id="consumerNumber" class="form-control" formControlName="consumerNumber" />
-      <div *ngIf="consumerNumber?.invalid && (consumerNumber?.dirty || consumerNumber?.touched)" class="text-danger">
-        <small *ngIf="consumerNumber?.hasError('required')">Please enter your Consumer Number.</small>
-        <small *ngIf="consumerNumber?.hasError('pattern')">Please enter a valid 13-digit Consumer Number.</small>
+      <label for="customerId" class="form-label">Consumer Number</label>
+      <input type="text" id="customerId" class="form-control" formControlName="customerId" />
+      <div *ngIf="customerId?.invalid && (customerId?.dirty || customerId?.touched)" class="text-danger">
+        <small *ngIf="customerId?.hasError('required')">Please enter your Consumer Number.</small>
+        <small *ngIf="customerId?.hasError('pattern')">Please enter a valid 13-digit Consumer Number.</small>
       </div>
     </div>
 
     <!-- Full Name -->
     <div class="mb-3">
-      <label for="fullName" class="form-label">Full Name</label>
-      <input type="text" id="fullName" class="form-control" formControlName="fullName" />
-      <div *ngIf="fullName?.invalid && (fullName?.dirty || fullName?.touched)" class="text-danger">
-        <small *ngIf="fullName?.hasError('required')">Full Name is required.</small>
-        <small *ngIf="fullName?.hasError('pattern')">Name should only contain letters.</small>
+      <label for="name" class="form-label">Full Name</label>
+      <input type="text" id="name" class="form-control" formControlName="name" />
+      <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="text-danger">
+        <small *ngIf="name?.hasError('required')">Full Name is required.</small>
+        <small *ngIf="name?.hasError('pattern')">Name should only contain letters.</small>
       </div>
     </div>
 
@@ -98,6 +98,6 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-dark mb-4 mt-3" [disabled]="registrationForm.invalid">Register</button>
+    <button type="submit" class="btn btn-dark mb-4 mt-3" >Register</button>
   </form>
 </div>

@@ -9,16 +9,16 @@
           <form [formGroup]="addCustomerForm" (ngSubmit)="onSubmit()">
             <!-- Full Name -->
             <div class="mb-3">
-              <label for="fullName" class="form-label">Full Name</label>
+              <label for="name" class="form-label">Full Name</label>
               <input
                 type="text"
-                id="fullName"
+                id="name"
                 class="form-control"
-                formControlName="fullName"
+                formControlName="name"
                 placeholder="Enter full name"
               />
               <div
-                *ngIf="addCustomerForm.get('fullName')?.invalid && addCustomerForm.get('fullName')?.touched"
+                *ngIf="addCustomerForm.get('name')?.invalid && addCustomerForm.get('name')?.touched"
                 class="text-danger mt-1"
               >
                 Full Name is required.
@@ -44,16 +44,16 @@
 
             <!-- Consumer Number -->
             <div class="mb-3">
-              <label for="consumerNumber" class="form-label">Consumer Number</label>
+              <label for="customerId" class="form-label">Consumer Number</label>
               <input
                 type="text"
-                id="consumerNumber"
+                id="customerId"
                 class="form-control"
-                formControlName="consumerNumber"
+                formControlName="customerId"
                 placeholder="Enter consumer number"
               />
               <div
-                *ngIf="addCustomerForm.get('consumerNumber')?.invalid && addCustomerForm.get('consumerNumber')?.touched"
+                *ngIf="addCustomerForm.get('customerId')?.invalid && addCustomerForm.get('customerId')?.touched"
                 class="text-danger mt-1"
               >
                 Consumer Number is required (min 5 characters).

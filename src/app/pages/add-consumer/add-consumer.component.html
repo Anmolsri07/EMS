@@ -1,1 +1,107 @@
-<p>add-consumer works!</p>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by Customer ID or Name"
+          [(ngModel)]="searchQuery"
+        />
+        <button type="button" class="btn btn-primary" (click)="searchCustomer()">Search</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="customers.length > 0" class="mt-3">
+    <h5>Select a Customer:</h5>
+    <ul class="list-group">
+      <li
+        class="list-group-item list-group-item-action"
+        *ngFor="let customer of customers"
+        (click)="selectCustomer(customer)"
+      >
+        {{ customer.name }} ({{ customer.id }})
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="!customers.length && searchCompleted" class="alert alert-warning mt-3">
+    Customer not found. Please add the customer first.
+  </div>
+</div>
+
+
+<div class="container my-5">
+  <h4>Add New Consumer</h4>
+  <form (ngSubmit)="submitForm()" #consumerForm="ngForm">
+    <div class="mb-3">
+      <label for="consumerId" class="form-label">Consumer ID</label>
+      <input
+        type="text"
+        id="consumerId"
+        class="form-control"
+        [(ngModel)]="consumer.consumerId"
+        name="consumerId"
+        required
+      />
+      <div *ngIf="consumerForm.submitted && !consumer.consumerId" class="text-danger">
+        Consumer ID is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="address" class="form-label">Address</label>
+      <textarea
+        id="address"
+        class="form-control"
+        [(ngModel)]="consumer.address"
+        name="address"
+        required
+      ></textarea>
+      <div *ngIf="consumerForm.submitted && !consumer.address" class="text-danger">
+        Address is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="contact" class="form-label">Contact Information</label>
+      <input
+        type="text"
+        id="contact"
+        class="form-control"
+        [(ngModel)]="consumer.contact"
+        name="contact"
+        required
+      />
+      <div *ngIf="consumerForm.submitted && !consumer.contact" class="text-danger">
+        Contact information is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="customerType" class="form-label">Customer Type</label>
+      <select
+        id="customerType"
+        class="form-select"
+        [(ngModel)]="consumer.customerType"
+        name="customerType"
+        required
+      >
+        <option value="" disabled>Select Customer Type</option>
+        <option value="Residential">Residential</option>
+        <option value="Commercial">Commercial</option>
+      </select>
+      <div *ngIf="consumerForm.submitted && !consumer.customerType" class="text-danger">
+        Customer type is required.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Add Consumer</button>
+  </form>
+
+  <div *ngIf="successMessage" class="alert alert-success mt-3">
+    {{ successMessage }}
+  </div>
+</div>
+

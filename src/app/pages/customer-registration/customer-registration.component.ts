@@ -8,27 +8,29 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
-import { ICustomers } from '../../interfaces/customer';
+import { ApiService } from '../../service/api.service';
 
 @Component({
   selector: 'app-customer-registration',
   imports: [ReactiveFormsModule, CommonModule],
+  providers: [ApiService],
   templateUrl: './customer-registration.component.html',
   styleUrls: ['./customer-registration.component.scss'],
 })
 export class CustomerRegistrationComponent {
-  registrationForm: FormGroup<{
-    [key in keyof ICustomers]: FormControl<ICustomers>;
-  }>;
+  registrationForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private readonly apiService: ApiService
+  ) {
     this.registrationForm = this.fb.group(
       {
-        consumerNumber: new FormControl('', [
+        customerId: new FormControl('', [
           Validators.required,
           Validators.pattern(/^\d{13}$/),
         ]),
-        fullName: new FormControl('', [
+        name: new FormControl('', [
           Validators.required,
           Validators.pattern(/^[a-zA-Z\s]+$/),
         ]),
@@ -56,11 +58,11 @@ export class CustomerRegistrationComponent {
     );
   }
 
-  get consumerNumber(): AbstractControl {
-    return this.registrationForm.get('consumerNumber')!;
+  get customerId(): AbstractControl {
+    return this.registrationForm.get('customerId')!;
   }
-  get fullName(): AbstractControl {
-    return this.registrationForm.get('fullName')!;
+  get name(): AbstractControl {
+    return this.registrationForm.get('name')!;
   }
   get address(): AbstractControl {
     return this.registrationForm.get('address')!;
@@ -92,12 +94,28 @@ export class CustomerRegistrationComponent {
 
   onSubmit() {
     if (this.registrationForm.valid) {
-      const { fullName, email, password, confirmPassword } = this.registrationForm.value;
-      if(password !== confirmPassword) {
-        alert('Confirm your password?')
+      const { name, email, password, confirmPassword } =
+        this.registrationForm.value;
+      if (password !== confirmPassword) {
+        alert('Confirm your password?');
         return;
       }
-      alert(`Registration Successful!\n\nName: ${fullName}\nEmail: ${email}`);
+      fetch('https://20kmf8l0-8080.inc1.devtunnels.ms/api/customers/register', {
+        method: 'POST',
+        body: JSON.stringify(this.registrationForm.value),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(async (response) => {
+          const res = await response.json();
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      this.apiService.createNewCustomer(this.registrationForm.value);
+      alert(`Registration Successful!\n\nName: ${name}\nEmail: ${email}`);
     }
   }
 }
