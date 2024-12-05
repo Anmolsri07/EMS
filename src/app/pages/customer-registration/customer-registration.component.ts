@@ -114,8 +114,14 @@ export class CustomerRegistrationComponent {
         .catch((err) => {
           console.log(err);
         });
-      this.apiService.createNewCustomer(this.registrationForm.value);
-      alert(`Registration Successful!\n\nName: ${name}\nEmail: ${email}`);
+      this.apiService.createNewCustomer(this.registrationForm.value).subscribe({
+        next(value) {
+          console.log(value);
+        },
+        error(err) {
+          console.log(err);
+        },
+      });
     }
   }
 }

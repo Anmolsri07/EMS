@@ -11,6 +11,6 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   createNewCustomer(payload: ICustomers) {
-    this.http.post(`${this.baseUrl}/api/customers/register`, payload)
+    return this.http.post(`${this.baseUrl}/api/customers/register`, payload)
   }
 }
