@@ -15,6 +15,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { unprotectedGuard } from './guard/unprotected.guard';
 import { protectedGuard } from './guard/protected.guard';
 
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+
 export const routes: Routes = [
   {
     path: '',
@@ -85,6 +87,11 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate: [unprotectedGuard],
+  },
+  {
+    path: 'landing-page',
+    component: LandingPageComponent,
+    // canActivate: [unprotectedGuard],
   },
   {
     path: '**',

@@ -1,0 +1,91 @@
+/* Reset default margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('../../resources/background_image.jpeg') no-repeat center center fixed; /* Set background image */
+    background-size: cover; /* Ensure the image covers the entire viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #333;
+}
+
+/* Main container styling */
+.container {
+    text-align: center;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 1); /* Semi-transparent white background for readability */
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Heading */
+h1 {
+    font-size: 2.5rem;
+    color: #1a73e8;
+    margin-bottom: 20px;
+}
+
+/* Subheading for description */
+p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Button Styling */
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-login {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-login:hover {
+    background-color: #45a049;
+}
+
+.btn-register {
+    background-color: #1a73e8;
+    color: white;
+}
+
+.btn-register:hover {
+    background-color: #1558b1;
+}
+
+/* Small text for footer information */
+.small-text {
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 20px;
+}
+
+/* Footer link styling */
+.small-text a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+.small-text a:hover {
+    text-decoration: underline;
+}
