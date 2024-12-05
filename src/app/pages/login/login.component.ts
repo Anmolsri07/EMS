@@ -23,7 +23,7 @@ export class LoginComponent {
         this.apiService
           .loginAdmin({
             password: this.username,
-            username: this.username,
+            username: this.password,
           })
           .subscribe({
             next: (value) => {
@@ -40,7 +40,7 @@ export class LoginComponent {
         this.apiService
           .loginCustomer({
             password: this.username,
-            username: this.username,
+            username: this.password,
           })
           .subscribe({
             next: (value) => {
