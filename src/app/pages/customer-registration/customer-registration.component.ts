@@ -9,6 +9,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { ApiService } from '../../service/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-registration',
@@ -22,7 +23,8 @@ export class CustomerRegistrationComponent {
 
   constructor(
     private fb: FormBuilder,
-    private readonly apiService: ApiService
+    private readonly apiService: ApiService,
+    private readonly router: Router
   ) {
     this.registrationForm = this.fb.group(
       {
@@ -58,6 +60,28 @@ export class CustomerRegistrationComponent {
     );
   }
 
+  onSubmit() {
+    if (this.registrationForm.valid) {
+      const { name, email, password, confirmPassword } =
+        this.registrationForm.value;
+      if (password !== confirmPassword) {
+        alert('Confirm your password?');
+        return;
+      }
+
+      this.apiService.createNewCustomer(this.registrationForm.value).subscribe({
+        next: (value)=> {
+          console.log(value);
+          this.router.navigate(['/login'])
+        },
+        error(err) {
+          alert(err)
+        },
+      })
+
+    }
+  }
+
   get customerId(): AbstractControl {
     return this.registrationForm.get('customerId')!;
   }
@@ -90,38 +114,5 @@ export class CustomerRegistrationComponent {
     const password = group.get('password')?.value;
     const confirmPassword = group.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { mismatch: true };
-  }
-
-  onSubmit() {
-    if (this.registrationForm.valid) {
-      const { name, email, password, confirmPassword } =
-        this.registrationForm.value;
-      if (password !== confirmPassword) {
-        alert('Confirm your password?');
-        return;
-      }
-      fetch('https://20kmf8l0-8080.inc1.devtunnels.ms/api/customers/register', {
-        method: 'POST',
-        body: JSON.stringify(this.registrationForm.value),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then(async (response) => {
-          const res = await response.json();
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      this.apiService.createNewCustomer(this.registrationForm.value).subscribe({
-        next(value) {
-          console.log(value);
-        },
-        error(err) {
-          console.log(err);
-        },
-      });
-    }
   }
 }

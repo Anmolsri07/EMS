@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { UserType } from '../../interfaces/users';
+import { ApiService } from '../../service/api.service';
 
 @Component({
   selector: 'app-login',
@@ -14,14 +15,44 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
+  constructor(private readonly apiService: ApiService, private readonly router: Router) {}
+
   onSubmit(form: any): void {
     if (form.valid) {
       if (this.userType === UserType.ADMIN) {
-        console.log('Admin Login:', this.username, this.password);
-        // Implement admin login logic here
+        this.apiService
+          .loginAdmin({
+            password: this.username,
+            username: this.username,
+          })
+          .subscribe({
+            next: (value) => {
+              // TODO: add response interfaces & login success conditions
+              console.log(value);
+              localStorage.setItem('user', JSON.stringify(value));
+              this.router.navigate(['/']);
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          });
       } else if (this.userType === UserType.CUSTOMER) {
-        console.log('Customer Login:', this.username, this.password);
-        // Implement customer login logic here
+        this.apiService
+          .loginCustomer({
+            password: this.username,
+            username: this.username,
+          })
+          .subscribe({
+            next: (value) => {
+              // TODO: add response interfaces & login success conditions
+              console.log(value);
+              localStorage.setItem('user', JSON.stringify(value));
+              this.router.navigate(['/']);
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          });
       }
     } else {
       console.log('Form is invalid');
