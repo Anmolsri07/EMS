@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import {
   FormBuilder,
   FormGroup,
@@ -24,14 +24,11 @@ export class CustomerRegistrationComponent {
   constructor(
     private fb: FormBuilder,
     private readonly apiService: ApiService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly location: Location
   ) {
     this.registrationForm = this.fb.group(
       {
-        customerId: new FormControl('', [
-          Validators.required,
-          Validators.pattern(/^\d{13}$/),
-        ]),
         name: new FormControl('', [
           Validators.required,
           Validators.pattern(/^[a-zA-Z\s]+$/),
@@ -82,9 +79,10 @@ export class CustomerRegistrationComponent {
     }
   }
 
-  get customerId(): AbstractControl {
-    return this.registrationForm.get('customerId')!;
+  handleBack() {
+    this.location.back()
   }
+
   get name(): AbstractControl {
     return this.registrationForm.get('name')!;
   }
