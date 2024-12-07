@@ -1,1 +1,131 @@
-<p>add-bill works!</p>
+<div class="container py-5">
+  <h2 class="mb-4">Add Bill</h2>
+
+  <!-- Add Bill Form -->
+  <form (submit)="saveBill($event)" class="needs-validation" novalidate>
+    <!-- Consumer ID -->
+    <div class="mb-3">
+      <label for="consumerId" class="form-label">Consumer ID</label>
+      <input
+        type="text"
+        class="form-control"
+        id="consumerId"
+        [(ngModel)]="bill.consumerId"
+        name="consumerId"
+        required
+      />
+      <div *ngIf="errors.consumerId" class="text-danger">{{ errors.consumerId }}</div>
+    </div>
+
+    <!-- Billing Period -->
+    <div class="mb-3">
+      <label for="billingPeriod" class="form-label">Billing Period</label>
+      <input
+        type="month"
+        class="form-control"
+        id="billingPeriod"
+        [(ngModel)]="bill.billingPeriod"
+        name="billingPeriod"
+        required
+      />
+      <div *ngIf="errors.billingPeriod" class="text-danger">{{ errors.billingPeriod }}</div>
+    </div>
+
+    <!-- Bill Date -->
+    <div class="mb-3">
+      <label for="billDate" class="form-label">Bill Date</label>
+      <input
+        type="date"
+        class="form-control"
+        id="billDate"
+        [(ngModel)]="bill.billDate"
+        name="billDate"
+        required
+      />
+      <div *ngIf="errors.billDate" class="text-danger">{{ errors.billDate }}</div>
+    </div>
+
+    <!-- Due Date -->
+    <div class="mb-3">
+      <label for="dueDate" class="form-label">Due Date</label>
+      <input
+        type="date"
+        class="form-control"
+        id="dueDate"
+        [(ngModel)]="bill.dueDate"
+        name="dueDate"
+        required
+      />
+      <div *ngIf="errors.dueDate" class="text-danger">{{ errors.dueDate }}</div>
+    </div>
+
+    <!-- Disconnection Date -->
+    <div class="mb-3">
+      <label for="disconnectionDate" class="form-label">Disconnection Date</label>
+      <input
+        type="date"
+        class="form-control"
+        id="disconnectionDate"
+        [(ngModel)]="bill.disconnectionDate"
+        name="disconnectionDate"
+      />
+    </div>
+
+    <!-- Bill Amount -->
+    <div class="mb-3">
+      <label for="billAmount" class="form-label">Bill Amount</label>
+      <input
+        type="number"
+        class="form-control"
+        id="billAmount"
+        [(ngModel)]="bill.billAmount"
+        name="billAmount"
+        min="0"
+        required
+      />
+      <div *ngIf="errors.billAmount" class="text-danger">{{ errors.billAmount }}</div>
+    </div>
+
+    <!-- Late Fee -->
+    <div class="mb-3">
+      <label for="lateFee" class="form-label">Late Fee (Optional)</label>
+      <input
+        type="number"
+        class="form-control"
+        id="lateFee"
+        [(ngModel)]="bill.lateFee"
+        name="lateFee"
+        min="0"
+        placeholder="0"
+      />
+    </div>
+
+    <!-- Status -->
+    <div class="mb-3">
+      <label for="status" class="form-label">Status</label>
+      <select
+        class="form-select"
+        id="status"
+        [(ngModel)]="bill.status"
+        name="status"
+        required
+      >
+        <option value="" disabled>Select Status</option>
+        <option value="Unpaid">Unpaid</option>
+        <option value="Paid">Paid</option>
+      </select>
+      <div *ngIf="errors.status" class="text-danger">{{ errors.status }}</div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-secondary" (click)="goToDashboard()">Back to Dashboard</button>
+    </div>
+  </form>
+
+  <!-- Success/Error Message -->
+  <div *ngIf="message" class="alert mt-4" [ngClass]="messageType">
+    {{ message }}
+  </div>
+</div>

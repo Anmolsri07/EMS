@@ -1,79 +1,86 @@
-<div class="container mt-5">
-  <!-- Welcome and User Info -->
-  <div class="row mb-5">
-    <nav class="navbar">
-      <ul>
-        <li><a [routerLink]="'view-bills'">View Bill</a></li>
-        <li><a [routerLink]="'pay-bills'">Pay Bill</a></li>
-        <li><a [routerLink]="'bill-history'">Bill History</a></li>
-        <li><a [routerLink]="'view-customer-complaints'">Complaint Status</a></li>
-      </ul>
-    </nav>
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+  <span class="navbar-brand">Welcome, {{ customerName }}!</span>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a
+          class="nav-link text-white mx-4"
+          role="button"
+          (click)="goToProfile()"
+          >Profile</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white mx-4" role="button" (click)="logout()"
+          >Logout</a
+        >
+      </li>
+    </ul>
   </div>
-  <div class="row mb-5">
+</nav>
 
-    <div class="col-12">
-      <div class="card p-4 shadow-sm">
-        <h2 class="text-primary">Welcome, {{ customer.fullName }}!</h2>
-        <p><strong>Account Number:</strong> {{ customer.accountNumber }}</p>
-        <p><strong>Current Billing Address:</strong> {{ customer.billingAddress }}</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Navigation to Key Features -->
-  <!-- <div class="row mb-5">
-    <div class="col-12">
-      <h4 class="text-secondary mb-3"></h4>
-      <div class="nav btn-group btn-group-sm w-100">
-        <a [routerLink]="'view-bills'" class="btn btn-sm btn-outline-primary w-100 py-3 hover-effect">
-          <i class="bi bi-file-earmark-text"></i> View Bills
-        </a>
-        <a [routerLink]="'pay-bills'" class="btn btn-sm btn-outline-success w-100 py-3 hover-effect">
-          <i class="bi bi-credit-card"></i> Pay Bill
-        </a>
-        <a [routerLink]="'bill-history'" class="btn btn-sm btn-outline-warning w-100 py-3 hover-effect">
-          <i class="bi bi-clock-history"></i> Bill History
-        </a>
-        <a [routerLink]="'registration-complaint'" class="btn btn-sm btn-outline-danger w-100 py-3 hover-effect">
-          <i class="bi bi-exclamation-circle"></i> Register Complaint
-        </a>
-        <a [routerLink]="'view-customer-complaints'" class="btn btn-sm btn-outline-info w-100 py-3 hover-effect">
-          <i class="bi bi-search"></i> Complaint Status
-        </a>
-      </div>
-    </div>
-  </div> -->
-
-  <!-- Current Bill Summary -->
-  <div class="row mb-5">
-    <div class="col-12">
-      <div class="card p-4 shadow-sm">
-        <h4 class="text-dark">Current Bill Summary</h4>
-        <p><strong>Billing Period:</strong> {{ customer.currentBill.billingPeriod }}</p>
-        <p><strong>Due Date:</strong> {{ customer.currentBill.dueDate }}</p>
-        <p><strong>Amount Due:</strong> ${{ customer.currentBill.amountDue }}</p>
-
-        <!-- Conditional rendering based on whether the bill is unpaid -->
-        <button type="button" *ngIf="customer.currentBill.unpaid" class="btn  btn-danger">Pay Now</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Profile and Account Settings -->
-  <div class="row mb-5">
-    <div class="col-12">
-      <div class="card p-4 shadow-sm">
-        <h4 class="text-dark">Account Settings</h4>
-        <a href="/profile" class="btn btn-outline-secondary">Profile / Account Settings</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Logout Button -->
+<!-- Main Dashboard -->
+<div class="container">
   <div class="row">
-    <div class="col-12">
-      <button (click)="logout()" class="btn btn-dark btn-block">Logout</button>
+    <!-- Account Information -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Account Information</h5>
+          <p class="card-text">
+            <strong>Account Number:</strong> {{ accountNumber }}
+          </p>
+          <p class="card-text">
+            <strong>Billing Address:</strong> {{ billingAddress }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- Feature Navigation -->
+    <div class="col-md-12">
+      <div class="row row-cols-3 g-2">
+        <div
+          class="col text-center"
+          *ngFor="let feature of features"
+          (click)="navigateTo(feature.route)"
+          role="button"
+        >
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <i [class]="'bi ' + feature.icon + ' fs-1 text-primary'"></i>
+              <p class="mt-2">{{ feature.name }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- Current Bill Summary -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Current Bill</h5>
+          <p class="card-text">
+            <strong>Billing Period:</strong> {{ billingPeriod }}
+          </p>
+          <p class="card-text"><strong>Due Date:</strong> {{ dueDate }}</p>
+          <p class="card-text">
+            <strong>Amount Due:</strong> {{ amountDue | currency }}
+          </p>
+          <button
+            type="button"
+            class="btn btn-warning"
+            *ngIf="isUnpaid"
+            (click)="payNow()"
+          >
+            Pay Now
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

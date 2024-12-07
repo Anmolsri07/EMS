@@ -16,6 +16,9 @@ import { unprotectedGuard } from './guard/unprotected.guard';
 import { protectedGuard } from './guard/protected.guard';
 
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { ViewComplaintHistoryComponent } from './pages/view-complaint-history/view-complaint-history.component';
+import { RemoveConsumerComponentComponent } from './pages/remove-consumer-component/remove-consumer-component.component';
+import { ViewCustomersComplaintsAdminComponent } from './pages/view-customers-complaints-admin/view-customers-complaints-admin.component';
 
 export const routes: Routes = [
   {
@@ -54,8 +57,18 @@ export const routes: Routes = [
     canActivate: [protectedGuard],
   },
   {
-    path: 'view-customer-complaints',
+    path: 'view-customer-status',
     component: ViewComplaintsComponent,
+    canActivate: [protectedGuard],
+  },
+  {
+    path: 'view-customer-complaint',
+    component: ViewCustomersComplaintsAdminComponent,
+    canActivate: [protectedGuard],
+  },
+  {
+    path: 'view-complaint-history',
+    component: ViewComplaintHistoryComponent,
     canActivate: [protectedGuard],
   },
   {
@@ -71,6 +84,11 @@ export const routes: Routes = [
   {
     path: 'update-consumer',
     component: UpdateConsumerComponent,
+    canActivate: [protectedGuard],
+  },
+  {
+    path: 'remove-consumer',
+    component: RemoveConsumerComponentComponent,
     canActivate: [protectedGuard],
   },
   {

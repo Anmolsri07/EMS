@@ -1,0 +1,112 @@
+<div class="container py-4">
+  <h2 class="mb-4">Search and Manage Complaints</h2>
+
+  <!-- Search Form -->
+  <form (submit)="searchComplaints($event)" class="mb-4">
+    <div class="row">
+      <!-- Customer ID or Complaint ID -->
+      <div class="col-md-4">
+        <label for="customerOrComplaintId" class="form-label">Customer ID / Complaint ID</label>
+        <input
+          type="text"
+          class="form-control"
+          id="customerOrComplaintId"
+          [(ngModel)]="searchCriteria.customerOrComplaintId"
+          name="customerOrComplaintId"
+        />
+      </div>
+
+      <!-- Complaint Type -->
+      <div class="col-md-4">
+        <label for="complaintType" class="form-label">Complaint Type</label>
+        <select
+          class="form-select"
+          id="complaintType"
+          [(ngModel)]="searchCriteria.complaintType"
+          name="complaintType"
+        >
+          <option value="">Select Complaint Type</option>
+          <option value="Billing Issue">Billing Issue</option>
+          <option value="Service Interruption">Service Interruption</option>
+          <option value="Technical Issue">Technical Issue</option>
+        </select>
+      </div>
+
+      <!-- Date Range -->
+      <div class="col-md-4">
+        <label for="dateRange" class="form-label">Date Range</label>
+        <div class="d-flex">
+          <input
+            type="date"
+            class="form-control me-2"
+            [(ngModel)]="searchCriteria.startDate"
+            name="startDate"
+          />
+          <span class="mx-2">to</span>
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="searchCriteria.endDate"
+            name="endDate"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Button -->
+    <div class="mt-3">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Complaint List Table -->
+  <div *ngIf="complaints.length > 0">
+    <h3>Complaint List</h3>
+    <table class="table table-bordered table-striped mt-4">
+      <thead>
+        <tr>
+          <th>Complaint ID</th>
+          <th>Customer ID</th>
+          <th>Complaint Type</th>
+          <th>Date Submitted</th>
+          <th>Status</th>
+          <th>Assigned Staff</th>
+          <th>Last Updated</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let complaint of complaints">
+          <td>{{ complaint.complaintId }}</td>
+          <td>{{ complaint.customerId }}</td>
+          <td>{{ complaint.complaintType }}</td>
+          <td>{{ complaint.dateSubmitted | date }}</td>
+          <td [ngClass]="{'text-danger': complaint.status === 'Open', 'text-warning': complaint.status === 'In Progress', 'text-success': complaint.status === 'Resolved'}">
+            {{ complaint.status }}
+          </td>
+          <td>{{ complaint.assignedStaff }}</td>
+          <td>{{ complaint.lastUpdated | date }}</td>
+          <td>
+            <button class="btn btn-info" (click)="updateStatus(complaint)">Update Status</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- No Complaints Found -->
+  <div *ngIf="complaints.length === 0 && !errorMessage">
+    <p>No complaints found based on the search criteria.</p>
+  </div>
+
+  <!-- Export Options -->
+  <div class="mt-4">
+    <button class="btn btn-secondary " (click)="exportToCSV()">Export to CSV</button>
+    <button class="btn btn-secondary mx-4" (click)="exportToPDF()">Export to PDF</button>
+  </div>
+</div>

@@ -1,13 +1,13 @@
 <div class="container py-4">
-  <h2 class="mb-4">Update Consumer Details</h2>
+  <h2 class="mb-4">Remove Consumer Details</h2>
 
   <!-- Search Form -->
   <form class="row g-3 mb-4" (submit)="searchCustomers($event)">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <input
         type="text"
         class="form-control"
-        placeholder="Search by Customer ID, Consumer Number, or Name"
+        placeholder="Search by Customer ID or Consumer Number"
         [(ngModel)]="searchQuery"
         name="searchQuery"
       />
@@ -34,8 +34,11 @@
           <td>{{ customer.consumerNumber }}</td>
           <td>{{ customer.name }}</td>
           <td>
-            <button class="btn btn-link" (click)="editCustomer(customer)">
-              Edit
+            <button
+              class="btn btn-danger"
+              (click)="deleteCustomer(customer)"
+            >
+              Delete
             </button>
           </td>
         </tr>
@@ -48,10 +51,10 @@
     No customers found. Please try again.
   </p>
 
-  <!-- Update Consumer Form -->
+  <!-- Delete Consumer Form -->
   <div *ngIf="selectedCustomer" class="card p-4">
-    <h3>Edit Consumer Details</h3>
-    <form (submit)="updateCustomer($event)">
+    <h3>Delete Consumer Details</h3>
+    <form (submit)="confirmDelete($event)">
       <!-- Non-editable Fields -->
       <div class="mb-3">
         <label>Customer ID</label>
@@ -78,19 +81,17 @@
         <input
           type="text"
           class="form-control"
-          [(ngModel)]="selectedCustomer.name"
-          name="name"
-          required
+          [value]="selectedCustomer.name"
+          disabled
         />
       </div>
       <div class="mb-3">
         <label>Address</label>
         <textarea
           class="form-control"
-          [(ngModel)]="selectedCustomer.address"
-          name="address"
+          [value]="selectedCustomer.address"
           rows="3"
-          required
+          disabled
         ></textarea>
       </div>
       <div class="mb-3">
@@ -98,30 +99,32 @@
         <input
           type="text"
           class="form-control"
-          [(ngModel)]="selectedCustomer.contact"
-          name="contact"
-          pattern="^[0-9]{10}$"
-          title="Enter a valid 10-digit phone number"
-          required
+          [value]="selectedCustomer.contact"
+          disabled
         />
       </div>
       <div class="mb-3">
         <label>Customer Type</label>
-        <select
-          title="customer type"
-          class="form-select"
-          [(ngModel)]="selectedCustomer.customerType"
-          name="customerType"
-          required
-        >
-          <option value="Residential">Residential</option>
-          <option value="Commercial">Commercial</option>
-        </select>
+        <input
+          type="text"
+          class="form-control"
+          [value]="selectedCustomer.customerType"
+          disabled
+        />
+      </div>
+
+      <!-- Confirmation Prompt -->
+      <div class="alert alert-warning">
+        Are you sure you want to remove this customer? This action cannot be undone.
       </div>
 
       <!-- Buttons -->
-      <button type="submit" class="btn btn-success me-3">Update</button>
-      <button type="button" class="btn btn-secondary" (click)="cancelEdit()">
+      <button type="submit" class="btn btn-danger me-3">Delete</button>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="cancelDelete()"
+      >
         Back
       </button>
     </form>

@@ -1,1 +1,59 @@
-<p>view-complaints works!</p>
+<div class="container py-4">
+  <h2 class="mb-4">Track Complaint Status</h2>
+
+  <!-- Search Form -->
+  <form class="mb-3" (submit)="searchComplaint($event)">
+    <div class="row g-3">
+      <!-- Complaint ID Search -->
+      <div class="col-md-6">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter Complaint ID"
+          [(ngModel)]="complaintId"
+          name="complaintId"
+        />
+      </div>
+
+      <!-- Status Filter -->
+      <div class="col-md-4">
+        <select
+          title="status"
+          class="form-select"
+          [(ngModel)]="selectedStatus"
+          name="status"
+        >
+          <option value="">All Statuses</option>
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Resolved">Resolved</option>
+          <option value="Closed">Closed</option>
+        </select>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Search</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Complaints List -->
+  <div *ngIf="filteredComplaints.length > 0">
+    <div class="card mb-3" *ngFor="let complaint of filteredComplaints">
+      <div class="card-body">
+        <h5 class="card-title">Complaint ID: {{ complaint.id }}</h5>
+        <p class="card-text">
+          <strong>Submission Date:</strong> {{ complaint.date }}<br />
+          <strong>Type:</strong> {{ complaint.type }}<br />
+          <strong>Status:</strong> {{ complaint.status }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Complaints Found -->
+  <p *ngIf="filteredComplaints.length === 0" class="text-muted">
+    No complaints found. Please try again.
+  </p>
+</div>

@@ -3,12 +3,12 @@ import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-update-consumer',
+  selector: 'app-remove-consumer-component',
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
-  templateUrl: './update-consumer.component.html',
-  styleUrl: './update-consumer.component.scss',
+  templateUrl: './remove-consumer-component.component.html',
+  styleUrl: './remove-consumer-component.component.scss',
 })
-export class UpdateConsumerComponent {
+export class RemoveConsumerComponentComponent {
   searchQuery: string = '';
   searchResults: any[] = [];
   selectedCustomer: any = null;
@@ -23,6 +23,7 @@ export class UpdateConsumerComponent {
       address: '123 Main Street, City',
       contact: '9876543210',
       customerType: 'Residential',
+      status: 'Active',
     },
   ];
 
@@ -32,33 +33,32 @@ export class UpdateConsumerComponent {
     this.searchResults = this.customers.filter(
       (customer) =>
         customer.customerId.includes(this.searchQuery) ||
-        customer.consumerNumber.includes(this.searchQuery) ||
-        customer.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        customer.consumerNumber.includes(this.searchQuery)
     );
   }
 
-  // Edit customer
-  editCustomer(customer: any) {
-    this.selectedCustomer = { ...customer }; // Clone to avoid direct mutation
+  // Select customer to delete
+  deleteCustomer(customer: any) {
+    this.selectedCustomer = { ...customer };
   }
 
-  // Update customer details
-  updateCustomer(event: Event) {
+  // Confirm delete
+  confirmDelete(event: Event) {
     event.preventDefault();
     const index = this.customers.findIndex(
       (c) => c.customerId === this.selectedCustomer.customerId
     );
     if (index !== -1) {
-      this.customers[index] = { ...this.selectedCustomer };
-      this.message = 'Customer details updated successfully!';
-      this.selectedCustomer = null; // Exit edit mode
+      this.customers[index].status = 'Inactive'; // Soft delete
+      this.message = 'Customer has been successfully deactivated.';
+      this.selectedCustomer = null;
     } else {
-      this.message = 'Error updating customer details. Please try again.';
+      this.message = 'Error deactivating the customer. Please try again.';
     }
   }
 
-  // Cancel editing
-  cancelEdit() {
+  // Cancel deletion
+  cancelDelete() {
     this.selectedCustomer = null;
     this.message = '';
   }

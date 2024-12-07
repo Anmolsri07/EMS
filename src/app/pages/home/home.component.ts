@@ -1,29 +1,53 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'app-home',
-  imports: [RouterModule, RouterLink, CommonModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  customer = {
-    fullName: 'Anmol sri',
-    accountNumber: '6205357513',
-    billingAddress: 'street no 2 ',
-    currentBill: {
-      billingPeriod: 'October 2024',
-      dueDate: '2024-11-30',
-      amountDue: 150.75,
-      unpaid: true,
-    },
-  };
+  constructor(private readonly router: Router) {}
 
-  // This method can be used to simulate logging out
+  customerName = 'John Doe';
+  accountNumber = '123456789';
+  billingAddress = '123 Elm Street, City, Country';
+  billingPeriod = '01 Nov 2024 - 30 Nov 2024';
+  dueDate = '15 Dec 2024';
+  amountDue = 120.5;
+  isUnpaid = true;
+
+  features = [
+    { name: 'View Bills', icon: 'bi-receipt', route: '/view-bills' },
+    { name: 'Pay Bill', icon: 'bi-credit-card', route: '/view-bills' },
+    { name: 'Bill History', icon: 'bi-calendar2-week', route: '/bill-history' },
+    {
+      name: 'Register Complaint',
+      icon: 'bi-chat-left-text',
+      route: '/registration-complaint',
+    },
+    {
+      name: 'Complaint Status',
+      icon: 'bi-clipboard-check',
+      route: '/view-customer-complaints',
+    },
+  ];
+
+  payNow() {
+    console.log('Redirect to payment page');
+  }
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
+
+  goToProfile() {
+    console.log('Redirect to profile page');
+  }
+
   logout() {
-    // Add logic for logging out (e.g., clearing session or redirecting)
-    alert('You have logged out!');
+    this.router.navigate(['/login'])
   }
 }
