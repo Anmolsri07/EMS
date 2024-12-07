@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -9,6 +9,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './bill-history.component.scss',
 })
 export class BillHistoryComponent {
+  constructor(private readonly location: Location) {}
   // Sample data for bills
   bills = [
     {
@@ -51,7 +52,6 @@ export class BillHistoryComponent {
   errorMessage = '';
   paymentStatusFilter = '';
 
-  constructor() {}
 
   ngOnInit(): void {
     this.calculateTotalAmount();
@@ -70,11 +70,11 @@ export class BillHistoryComponent {
     if (this.startDate === null) {
       return;
     }
-      const filtered = this.bills.filter(
-        (bill) =>
-          bill.billDate >= (this.startDate as any).value &&
-          bill.billDate <= (this.endDate as any).value
-      );
+    const filtered = this.bills.filter(
+      (bill) =>
+        bill.billDate >= (this.startDate as any).value &&
+        bill.billDate <= (this.endDate as any).value
+    );
     this.filteredBills = filtered;
     this.calculateTotalAmount();
     this.loading = false;
@@ -101,5 +101,9 @@ export class BillHistoryComponent {
   downloadBill(billId: string): void {
     // Simulate downloading a PDF or other file format
     alert('Downloading Bill ' + billId);
+  }
+
+  handleBack(){
+    this.location.back()
   }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -46,7 +46,7 @@ export class ViewBillsComponent {
 
   totalAmount: number = 0;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private location: Location) {}
 
   ngOnInit(): void {
     this.updateTotal();
@@ -75,5 +75,9 @@ export class ViewBillsComponent {
     } else {
       alert('Please select at least one bill to proceed.');
     }
+  }
+
+  handleBack() {
+    this.location.back()
   }
 }

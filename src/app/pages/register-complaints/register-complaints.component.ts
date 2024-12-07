@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -9,13 +9,13 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   styleUrl: './register-complaints.component.scss',
 })
 export class RegisterComplaintsComponent {
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private location: Location) {}
+
   complaintForm: FormGroup | any;
   categories: string[] = []; // Will hold categories for selected complaint type
   contactInfo = { email: 'user@example.com', phone: '1234567890' }; // Sample registered contact information
 
   complaintTypes = ['Billing Issue', 'Power Outage', 'Meter Reading Issue'];
-
 
   ngOnInit(): void {
     this.complaintForm = this.fb.group({
@@ -76,5 +76,9 @@ export class RegisterComplaintsComponent {
   onReset(): void {
     this.complaintForm.reset();
     this.contactInfo = { email: 'user@example.com', phone: '1234567890' }; // Reset contact information
+  }
+
+  handleBack() {
+    this.location.back()
   }
 }
