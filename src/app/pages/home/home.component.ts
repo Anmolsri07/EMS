@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common'
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +31,52 @@ export class HomeComponent {
     {
       name: 'Complaint Status',
       icon: 'bi-clipboard-check',
-      route: '/view-customer-complaints',
+      route: '/view-customer-status',
+    },
+    {
+      name: 'View Bill Summary',
+      icon: 'bi-clipboard-check',
+      route: '/view-bill-summary',
+    },
+    {
+      name: 'Registration Complaint',
+      icon: 'bi-clipboard-check',
+      route: '/registration-complaint',
+    },
+    {
+      name: 'View Customer Status',
+      icon: 'bi-clipboard-check',
+      route: '/view-customer-status',
+    },
+    {
+      name: 'View Complaint History',
+      icon: 'bi-clipboard-check',
+      route: '/view-complaint-history',
+    },
+    {
+      name: 'Add Customer',
+      icon: 'bi-clipboard-check',
+      route: '/add-customer',
+    },
+    {
+      name: 'Add Consumer',
+      icon: 'bi-clipboard-check',
+      route: '/add-consumer',
+    },
+    {
+      name: 'Update Consumer',
+      icon: 'bi-clipboard-check',
+      route: '/update-consumer',
+    },
+    {
+      name: 'Remove Consumer',
+      icon: 'bi-clipboard-check',
+      route: '/remove-consumer',
+    },
+    {
+      name: 'View Bills',
+      icon: 'bi-clipboard-check',
+      route: '/view-bills',
     },
   ];
 
@@ -48,6 +93,6 @@ export class HomeComponent {
   }
 
   logout() {
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
 }

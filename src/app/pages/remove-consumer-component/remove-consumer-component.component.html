@@ -13,7 +13,10 @@
       />
     </div>
     <div class="col-md-2">
-      <button type="submit" class="btn btn-primary w-100">Search</button>
+      <div class="d-flex gap-3">
+        <button type="submit" class="btn btn-primary w-100">Search</button>
+        <button type="button" class="btn btn-warning" (click)="handleBack()">Back</button>
+      </div>
     </div>
   </form>
 
@@ -34,10 +37,7 @@
           <td>{{ customer.consumerNumber }}</td>
           <td>{{ customer.name }}</td>
           <td>
-            <button
-              class="btn btn-danger"
-              (click)="deleteCustomer(customer)"
-            >
+            <button class="btn btn-danger" (click)="deleteCustomer(customer)">
               Delete
             </button>
           </td>
@@ -115,16 +115,13 @@
 
       <!-- Confirmation Prompt -->
       <div class="alert alert-warning">
-        Are you sure you want to remove this customer? This action cannot be undone.
+        Are you sure you want to remove this customer? This action cannot be
+        undone.
       </div>
 
       <!-- Buttons -->
       <button type="submit" class="btn btn-danger me-3">Delete</button>
-      <button
-        type="button"
-        class="btn btn-secondary"
-        (click)="cancelDelete()"
-      >
+      <button type="button" class="btn btn-secondary" (click)="cancelDelete()">
         Back
       </button>
     </form>

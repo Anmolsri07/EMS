@@ -8,7 +8,13 @@
           placeholder="Search by Customer ID or Name"
           [(ngModel)]="searchQuery"
         />
-        <button type="button" class="btn btn-primary" (click)="searchCustomer()">Search</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="searchCustomer()"
+        >
+          Search
+        </button>
       </div>
     </div>
   </div>
@@ -26,11 +32,13 @@
     </ul>
   </div>
 
-  <div *ngIf="!customers.length && searchCompleted" class="alert alert-warning mt-3">
+  <div
+    *ngIf="!customers.length && searchCompleted"
+    class="alert alert-warning mt-3"
+  >
     Customer not found. Please add the customer first.
   </div>
 </div>
-
 
 <div class="container my-5">
   <h4>Add New Consumer</h4>
@@ -45,7 +53,10 @@
         name="consumerId"
         required
       />
-      <div *ngIf="consumerForm.submitted && !consumer.consumerId" class="text-danger">
+      <div
+        *ngIf="consumerForm.submitted && !consumer.consumerId"
+        class="text-danger"
+      >
         Consumer ID is required.
       </div>
     </div>
@@ -59,7 +70,10 @@
         name="address"
         required
       ></textarea>
-      <div *ngIf="consumerForm.submitted && !consumer.address" class="text-danger">
+      <div
+        *ngIf="consumerForm.submitted && !consumer.address"
+        class="text-danger"
+      >
         Address is required.
       </div>
     </div>
@@ -74,7 +88,10 @@
         name="contact"
         required
       />
-      <div *ngIf="consumerForm.submitted && !consumer.contact" class="text-danger">
+      <div
+        *ngIf="consumerForm.submitted && !consumer.contact"
+        class="text-danger"
+      >
         Contact information is required.
       </div>
     </div>
@@ -92,16 +109,20 @@
         <option value="Residential">Residential</option>
         <option value="Commercial">Commercial</option>
       </select>
-      <div *ngIf="consumerForm.submitted && !consumer.customerType" class="text-danger">
+      <div
+        *ngIf="consumerForm.submitted && !consumer.customerType"
+        class="text-danger"
+      >
         Customer type is required.
       </div>
     </div>
-
-    <button type="submit" class="btn btn-success">Add Consumer</button>
+    <div class="d-flex gap-3 mt-5">
+      <button type="button" class="btn btn-warning" (click)="handleBack()">Back</button>
+      <button type="submit" class="btn btn-success">Add Consumer</button>
+    </div>
   </form>
 
   <div *ngIf="successMessage" class="alert alert-success mt-3">
     {{ successMessage }}
   </div>
 </div>
-

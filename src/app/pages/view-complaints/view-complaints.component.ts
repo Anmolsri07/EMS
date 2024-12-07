@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './view-complaints.component.scss',
 })
 export class ViewComplaintsComponent {
+  constructor(private location: Location){}
   // User input
   complaintId: string = '';
   selectedStatus: string = '';
@@ -51,5 +52,9 @@ export class ViewComplaintsComponent {
 
       return matchesId && matchesStatus;
     });
+  }
+
+  handleBack() {
+    this.location.back()
   }
 }

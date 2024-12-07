@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './add-consumer.component.scss',
 })
 export class AddConsumerComponent {
+  constructor(private location: Location) {}
   searchQuery: string = '';
   customers: any[] = [];
   searchCompleted: boolean = false;
@@ -73,5 +74,9 @@ export class AddConsumerComponent {
       contact: '',
       customerType: '',
     };
+  }
+
+  handleBack() {
+    this.location.back()
   }
 }

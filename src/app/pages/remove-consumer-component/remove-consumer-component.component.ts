@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -9,6 +9,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './remove-consumer-component.component.scss',
 })
 export class RemoveConsumerComponentComponent {
+
+  constructor(private location: Location) {}
+
   searchQuery: string = '';
   searchResults: any[] = [];
   selectedCustomer: any = null;
@@ -61,5 +64,9 @@ export class RemoveConsumerComponentComponent {
   cancelDelete() {
     this.selectedCustomer = null;
     this.message = '';
+  }
+
+  handleBack() {
+    this.location.back();
   }
 }

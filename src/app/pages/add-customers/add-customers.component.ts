@@ -1,6 +1,11 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-add-customers',
@@ -12,7 +17,7 @@ export class AddCustomersComponent {
   addCustomerForm: FormGroup;
   defaultPassword: string = 'Default@123'; // Assign default password
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private location: Location) {
     this.addCustomerForm = this.fb.group({
       name: ['', Validators.required],
       address: ['', Validators.required],
@@ -60,5 +65,9 @@ export class AddCustomersComponent {
 
   handleError(error: any) {
     alert(error.message || 'An error occurred while adding the customer.');
+  }
+
+  handleBack() {
+    this.location.back();
   }
 }

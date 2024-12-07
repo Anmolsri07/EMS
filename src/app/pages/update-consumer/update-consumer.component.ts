@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './update-consumer.component.scss',
 })
 export class UpdateConsumerComponent {
+  constructor(private location: Location) {}
   searchQuery: string = '';
   searchResults: any[] = [];
   selectedCustomer: any = null;
@@ -61,5 +62,9 @@ export class UpdateConsumerComponent {
   cancelEdit() {
     this.selectedCustomer = null;
     this.message = '';
+  }
+
+  handleBack() {
+    this.location.back();
   }
 }

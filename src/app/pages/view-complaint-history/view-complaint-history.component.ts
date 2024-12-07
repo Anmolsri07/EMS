@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './view-complaint-history.component.scss',
 })
 export class ViewComplaintHistoryComponent {
+  constructor(private location: Location) {}
   // User input for filtering
   searchId: string = '';
   filterStatus: string = '';
@@ -78,5 +79,9 @@ export class ViewComplaintHistoryComponent {
   // View details of a complaint
   viewDetails(complaint: any) {
     this.selectedComplaint = complaint;
+  }
+
+  handleBack() {
+    this.location.back()
   }
 }
