@@ -15,14 +15,20 @@ import { LoginComponent } from './pages/login/login.component';
 import { unprotectedGuard } from './guard/unprotected.guard';
 import { protectedGuard } from './guard/protected.guard';
 
-import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+
 import { ViewComplaintHistoryComponent } from './pages/view-complaint-history/view-complaint-history.component';
 import { RemoveConsumerComponentComponent } from './pages/remove-consumer-component/remove-consumer-component.component';
 import { ViewCustomersComplaintsAdminComponent } from './pages/view-customers-complaints-admin/view-customers-complaints-admin.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 
 export const routes: Routes = [
   {
     path: '',
+    component: LandingPageComponent,
+    canActivate: [unprotectedGuard],
+  },
+  {
+    path: 'home',
     component: HomeComponent,
     canActivate: [protectedGuard],
   },
@@ -106,11 +112,7 @@ export const routes: Routes = [
     component: LoginComponent,
     canActivate: [unprotectedGuard],
   },
-  {
-    path: 'landing-page',
-    component: LandingPageComponent,
-    // canActivate: [unprotectedGuard],
-  },
+
   {
     path: '**',
     redirectTo: '',
