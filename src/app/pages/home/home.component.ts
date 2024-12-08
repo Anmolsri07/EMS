@@ -69,7 +69,7 @@ export class HomeComponent {
     {
       name: 'Complaint Status',
       icon: 'bi-clipboard-check',
-      route: '/view-customer-status',
+      route: '/view-complaint-status',
       role: UserType.CUSTOMER,
     },
     {
