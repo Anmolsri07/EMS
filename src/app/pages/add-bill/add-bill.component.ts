@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../service/api.service';
 import { IBill } from '../../interfaces/bills';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-bill',
@@ -11,7 +12,7 @@ import { IBill } from '../../interfaces/bills';
   styleUrl: './add-bill.component.scss',
 })
 export class AddBillComponent {
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router: Router) {}
   bill: IBill = {
     consumerId: '',
     billNumber: '',
@@ -71,6 +72,6 @@ export class AddBillComponent {
   }
 
   goToDashboard() {
-    // Navigate to dashboard
+   this.router.navigate(['/home'])
   }
 }
