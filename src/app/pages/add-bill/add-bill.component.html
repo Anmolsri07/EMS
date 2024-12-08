@@ -12,6 +12,7 @@
         id="consumerId"
         [(ngModel)]="bill.consumerId"
         name="consumerId"
+        (blur)="validateConsumerId()"
         required
       />
       <div *ngIf="errors.consumerId" class="text-danger">{{ errors.consumerId }}</div>
@@ -26,6 +27,7 @@
         id="billingPeriod"
         [(ngModel)]="bill.billingPeriod"
         name="billingPeriod"
+        (blur)="checkDuplicateBill()"
         required
       />
       <div *ngIf="errors.billingPeriod" class="text-danger">{{ errors.billingPeriod }}</div>
@@ -40,6 +42,7 @@
         id="billDate"
         [(ngModel)]="bill.billDate"
         name="billDate"
+        (change)="validateDates()"
         required
       />
       <div *ngIf="errors.billDate" class="text-danger">{{ errors.billDate }}</div>
@@ -54,6 +57,7 @@
         id="dueDate"
         [(ngModel)]="bill.dueDate"
         name="dueDate"
+        (change)="validateDates()"
         required
       />
       <div *ngIf="errors.dueDate" class="text-danger">{{ errors.dueDate }}</div>
