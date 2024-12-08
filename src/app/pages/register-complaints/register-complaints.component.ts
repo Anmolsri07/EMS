@@ -78,6 +78,8 @@ export class RegisterComplaintsComponent {
       const currentUser = JSON.parse(localStorage.getItem('user') as string);
       this.complaintForm.value.consumerId = currentUser.customerId;
       this.complaintForm.value.dateRegistered = new Date().toDateString();
+
+
       this.complaintForm.value.resolutinTime = new Date().getTime();
       this.complaintForm.value.status = 'Pending';
       console.log('this.complaintForm.value', this.complaintForm.value);
