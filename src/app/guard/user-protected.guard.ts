@@ -7,6 +7,7 @@ export const userProtectedGuard: CanActivateFn = (route, state) => {
   }
   const user = JSON.parse(localUser as string);
   if(user.role = 'user') {
+
     return true
   }
   return false;

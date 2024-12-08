@@ -20,6 +20,8 @@ import { ViewComplaintHistoryComponent } from './pages/view-complaint-history/vi
 import { RemoveConsumerComponentComponent } from './pages/remove-consumer-component/remove-consumer-component.component';
 import { ViewCustomersComplaintsAdminComponent } from './pages/view-customers-complaints-admin/view-customers-complaints-admin.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { userProtectedGuard } from './guard/user-protected.guard';
+import { adminProtectedGuard } from './guard/admin-protected.guard';
 
 export const routes: Routes = [
   {
@@ -45,27 +47,27 @@ export const routes: Routes = [
   {
     path: 'view-bill-summary',
     component: ViewBillSummaryComponent,
-    canActivate: [protectedGuard],
+    canActivate: [userProtectedGuard],
   },
   {
     path: 'pay-bills',
     component: PayBillComponent,
-    canActivate: [protectedGuard],
+    canActivate: [userProtectedGuard],
   },
   {
     path: 'bill-history',
     component: BillHistoryComponent,
-    canActivate: [protectedGuard],
+    canActivate: [userProtectedGuard],
   },
   {
     path: 'registration-complaint',
     component: RegisterComplaintsComponent,
-    canActivate: [protectedGuard],
+    canActivate: [userProtectedGuard],
   },
   {
-    path: 'view-customer-status',
+    path: 'view-complaint-status',
     component: ViewComplaintsComponent,
-    canActivate: [protectedGuard],
+    canActivate: [userProtectedGuard],
   },
   {
     path: 'view-customer-complaint',
@@ -80,27 +82,27 @@ export const routes: Routes = [
   {
     path: 'add-customer',
     component: AddCustomersComponent,
-    canActivate: [protectedGuard],
+    canActivate: [adminProtectedGuard],
   },
   {
     path: 'add-consumer',
     component: AddConsumerComponent,
-    canActivate: [protectedGuard],
+    canActivate: [adminProtectedGuard],
   },
   {
     path: 'update-consumer',
     component: UpdateConsumerComponent,
-    canActivate: [protectedGuard],
+    canActivate: [adminProtectedGuard],
   },
   {
     path: 'remove-consumer',
     component: RemoveConsumerComponentComponent,
-    canActivate: [protectedGuard],
+    canActivate: [adminProtectedGuard],
   },
   {
     path: 'add-bills',
     component: AddBillComponent,
-    canActivate: [protectedGuard],
+    canActivate: [adminProtectedGuard],
   },
   {
     path: 'view-bills',
@@ -111,10 +113,5 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate: [unprotectedGuard],
-  },
-
-  {
-    path: '**',
-    redirectTo: '/login',
   },
 ];

@@ -5,7 +5,7 @@ export enum CustomerType {
 
 export enum UserType {
   ADMIN = 'admin',
-  CUSTOMER = 'customer'
+  CUSTOMER = 'customer',
 }
 
 export interface ILogin {
@@ -13,7 +13,6 @@ export interface ILogin {
   password: string;
   role: UserType;
 }
-
 
 export interface ICustomers {
   customerId: number;
@@ -25,5 +24,5 @@ export interface ICustomers {
   userId: string;
   password: string;
   confirmPassword: string;
-
+  role: UserType;
 }

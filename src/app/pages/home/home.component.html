@@ -22,22 +22,7 @@
 
 <!-- Main Dashboard -->
 <div class="container">
-  <div class="row">
-    <!-- Account Information -->
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Account Information</h5>
-          <p class="card-text">
-            <strong>Account Number:</strong> {{ accountNumber }}
-          </p>
-          <p class="card-text">
-            <strong>Billing Address:</strong> {{ billingAddress }}
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+
   <div class="row">
     <!-- Feature Navigation -->
     <div class="col-md-12">
@@ -48,6 +33,7 @@
           (click)="navigateTo(feature.route)"
           role="button"
         >
+        <div *ngIf="currentUser?.role === feature.role">
           <div class="card h-100 shadow-sm">
             <div class="card-body">
               <i [class]="'bi ' + feature.icon + ' fs-1 text-primary'"></i>
@@ -55,32 +41,9 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <!-- Current Bill Summary -->
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Current Bill</h5>
-          <p class="card-text">
-            <strong>Billing Period:</strong> {{ billingPeriod }}
-          </p>
-          <p class="card-text"><strong>Due Date:</strong> {{ dueDate }}</p>
-          <p class="card-text">
-            <strong>Amount Due:</strong> {{ amountDue | currency }}
-          </p>
-          <button
-            type="button"
-            class="btn btn-warning"
-            *ngIf="isUnpaid"
-            (click)="payNow()"
-          >
-            Pay Now
-          </button>
         </div>
       </div>
     </div>
   </div>
+
 </div>

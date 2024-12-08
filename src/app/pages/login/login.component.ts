@@ -14,47 +14,16 @@ export class LoginComponent {
   userId: string = '';
   password: string = '';
   userType: UserType = UserType.CUSTOMER;
+  isCreating: boolean = false;
 
-  constructor(private readonly apiService: ApiService, private readonly router: Router) { }
+  constructor(
+    private readonly apiService: ApiService,
+    private readonly router: Router
+  ) {}
 
   onSubmit(form: any): void {
     if (form.valid) {
-      // if (this.userType === UserType.ADMIN) {
-      //   this.apiService
-      //     .loginAdmin({
-      //       password: this.username,
-      //       username: this.password,
-      //     })
-      //     .subscribe({
-      //       next: (value) => {
-      //         // TODO: add response interfaces & login success conditions
-      //         console.log(value);
-      //         localStorage.setItem('user', JSON.stringify(value));
-      //         this.router.navigate(['/']);
-      //       },
-      //       error: (err) => {
-      //         console.log(err);
-      //       },
-      //     });
-      // } 
-      // else if (this.userType === UserType.CUSTOMER) {
-      //   this.apiService
-      //     .loginCustomer({
-      //       password: this.username,
-      //       username: this.password,
-      //     })
-      //     .subscribe({
-      //       next: (value) => {
-      //         // TODO: add response interfaces & login success conditions
-      //         console.log(value);
-      //         localStorage.setItem('user', JSON.stringify(value));
-      //         this.router.navigate(['/']);
-      //       },
-      //       error: (err) => {
-      //         console.log(err);
-      //       },
-      //     });
-      // }
+      this.isCreating = true;
       this.apiService
         .loginCustomer({
           userId: this.userId,
@@ -63,7 +32,13 @@ export class LoginComponent {
         })
         .subscribe({
           next: (value) => {
-            // TODO: add response interfaces & login success conditions
+            if (typeof value === 'string') {
+              alert(value);
+              return;
+            } else {
+              alert('Login successfully');
+            }
+            (value as any).role = this.userType;
             console.log(value);
             localStorage.setItem('user', JSON.stringify(value));
             this.router.navigate(['/home']);
@@ -71,6 +46,9 @@ export class LoginComponent {
           error: (err) => {
             console.log(err);
           },
+          complete: ()=> {
+            this.isCreating = false;
+          }
         });
     } else {
       console.log('Form is invalid');

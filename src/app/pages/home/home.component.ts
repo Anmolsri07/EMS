@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ICustomers, UserType } from '../../interfaces/users';
 
 @Component({
   selector: 'app-home',
@@ -10,73 +11,102 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent {
   constructor(private readonly router: Router) {}
+  public currentUser: ICustomers = JSON.parse(
+    localStorage.getItem('user') as string
+  );
 
-  customerName = 'John Doe';
-  accountNumber = '123456789';
-  billingAddress = '123 Elm Street, City, Country';
-  billingPeriod = '01 Nov 2024 - 30 Nov 2024';
-  dueDate = '15 Dec 2024';
-  amountDue = 120.5;
-  isUnpaid = true;
+  customerName = this.currentUser.name ?? '';
 
   features = [
-    { name: 'View Bills', icon: 'bi-receipt', route: '/view-bills' },
-    { name: 'Pay Bill', icon: 'bi-credit-card', route: '/view-bills' },
-    { name: 'Bill History', icon: 'bi-calendar2-week', route: '/bill-history' },
     {
-      name: 'Register Complaint',
-      icon: 'bi-chat-left-text',
-      route: '/registration-complaint',
+      name: 'View Bills',
+      icon: 'bi-receipt',
+      route: '/view-bills',
+      role: UserType.ADMIN,
     },
     {
-      name: 'Complaint Status',
-      icon: 'bi-clipboard-check',
-      route: '/view-customer-status',
-    },
-    {
-      name: 'View Bill Summary',
-      icon: 'bi-clipboard-check',
-      route: '/view-bill-summary',
-    },
-    {
-      name: 'Registration Complaint',
-      icon: 'bi-clipboard-check',
-      route: '/registration-complaint',
-    },
-    {
-      name: 'View Customer Status',
-      icon: 'bi-clipboard-check',
-      route: '/view-customer-status',
-    },
-    {
-      name: 'View Complaint History',
-      icon: 'bi-clipboard-check',
-      route: '/view-complaint-history',
+      name: 'Add Bill',
+      icon: 'bi-credit-card',
+      route: '/add-bills',
+      role: UserType.ADMIN,
     },
     {
       name: 'Add Customer',
       icon: 'bi-clipboard-check',
       route: '/add-customer',
+      role: UserType.ADMIN,
     },
     {
       name: 'Add Consumer',
       icon: 'bi-clipboard-check',
       route: '/add-consumer',
+      role: UserType.ADMIN,
     },
     {
       name: 'Update Consumer',
       icon: 'bi-clipboard-check',
       route: '/update-consumer',
+      role: UserType.ADMIN,
     },
     {
       name: 'Remove Consumer',
       icon: 'bi-clipboard-check',
       route: '/remove-consumer',
+      role: UserType.ADMIN,
+    },
+    {
+      name: 'Pay Bill',
+      icon: 'bi-credit-card',
+      route: '/view-bills',
+      role: UserType.CUSTOMER,
+    },
+    {
+      name: 'Bill History',
+      icon: 'bi-calendar2-week',
+      route: '/bill-history',
+      role: UserType.CUSTOMER,
+    },
+    {
+      name: 'Register Complaint',
+      icon: 'bi-chat-left-text',
+      route: '/registration-complaint',
+      role: UserType.CUSTOMER,
+    },
+    {
+      name: 'Complaint Status',
+      icon: 'bi-clipboard-check',
+      route: '/view-customer-status',
+      role: UserType.CUSTOMER,
+    },
+    {
+      name: 'View Bill Summary',
+      icon: 'bi-clipboard-check',
+      route: '/view-bill-summary',
+      role: UserType.CUSTOMER,
+    },
+    {
+      name: 'Registration Complaint',
+      icon: 'bi-clipboard-check',
+      route: '/registration-complaint',
+      role: UserType.CUSTOMER,
+    },
+    {
+      name: 'View Customer Status',
+      icon: 'bi-clipboard-check',
+      route: '/view-customer-status',
+      role: UserType.CUSTOMER,
+    },
+    {
+      name: 'View Complaint History',
+      icon: 'bi-clipboard-check',
+      route: '/view-complaint-history',
+      role: UserType.CUSTOMER,
     },
     {
       name: 'View Bills',
       icon: 'bi-clipboard-check',
       route: '/view-bills',
+      role: UserType.CUSTOMER,
     },
   ];
 
@@ -93,6 +123,7 @@ export class HomeComponent {
   }
 
   logout() {
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 }
