@@ -26,7 +26,7 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/api/customers/register`, payload);
   }
 
-  getCustomerByCustomerId(customerId: string) {
+  getConsumerByCustomerId(customerId: string) {
     return this.http.get(
       `${this.baseUrl}/apiAdmin/getAllConsumers/${customerId}`
     );

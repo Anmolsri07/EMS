@@ -67,12 +67,6 @@ export class HomeComponent {
       role: UserType.CUSTOMER,
     },
     {
-      name: 'Register Complaint',
-      icon: 'bi-chat-left-text',
-      route: '/registration-complaint',
-      role: UserType.CUSTOMER,
-    },
-    {
       name: 'Complaint Status',
       icon: 'bi-clipboard-check',
       route: '/view-customer-status',
@@ -88,12 +82,6 @@ export class HomeComponent {
       name: 'Registration Complaint',
       icon: 'bi-clipboard-check',
       route: '/registration-complaint',
-      role: UserType.CUSTOMER,
-    },
-    {
-      name: 'View Customer Status',
-      icon: 'bi-clipboard-check',
-      route: '/view-customer-status',
       role: UserType.CUSTOMER,
     },
     {

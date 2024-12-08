@@ -34,7 +34,7 @@ export class AddConsumerComponent {
   allConsumers: any[] = [];
 
   async searchCustomer() {
-    this.apiService.getCustomerByCustomerId(this.searchQuery).subscribe({
+    this.apiService.getConsumerByCustomerId(this.searchQuery).subscribe({
       next: (value) => {
         if (typeof value !== 'string') {
           this.customers = [value];
