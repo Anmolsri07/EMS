@@ -2,13 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { ICustomers, ILogin } from '../interfaces/users';
+import { IBill } from '../interfaces/bills';
+import { IComplaint } from '../interfaces/complaint';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  private readonly baseUrl = environment.SERVER_URL
-  constructor(private http: HttpClient) { }
+  private readonly baseUrl = environment.SERVER_URL;
+  constructor(private http: HttpClient) {}
 
   loginCustomer(payload: ILogin) {
     // TODO: Add customer login endpoint 👇
@@ -21,12 +23,24 @@ export class ApiService {
   // }
 
   createNewCustomer(payload: ICustomers) {
-    return this.http.post(`${this.baseUrl}/api/customers/register`, payload)
+    return this.http.post(`${this.baseUrl}/api/customers/register`, payload);
   }
 
   getCustomerByCustomerId(customerId: string) {
     return this.http.get(
       `${this.baseUrl}/apiAdmin/getAllConsumers/${customerId}`
     );
+  }
+
+  createBill(payload: IBill) {
+    return this.http.post(`${this.baseUrl}/apiAdmin/addBill`, payload);
+  }
+
+  getAllBills(customerId: string) {
+    return this.http.get(`${this.baseUrl}/api/viewBill/${customerId}`);
+  }
+
+  createComplaint(payload: IComplaint) {
+    return this.http.post(`${this.baseUrl}/api/register/complaint`, payload);
   }
 }

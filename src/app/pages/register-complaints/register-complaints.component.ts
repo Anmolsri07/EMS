@@ -1,6 +1,13 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { ApiService } from '../../service/api.service';
 
 @Component({
   selector: 'app-register-complaints',
@@ -9,11 +16,15 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   styleUrl: './register-complaints.component.scss',
 })
 export class RegisterComplaintsComponent {
-  constructor(private fb: FormBuilder, private location: Location) {}
+  constructor(
+    private fb: FormBuilder,
+    private location: Location,
+    private apiService: ApiService
+  ) {}
 
   complaintForm: FormGroup | any;
-  categories: string[] = []; // Will hold categories for selected complaint type
-  contactInfo = { email: 'user@example.com', phone: '1234567890' }; // Sample registered contact information
+  categories: string[] = [];
+  contactInfo = { email: 'user@example.com', phone: '1234567890' };
 
   complaintTypes = ['Billing Issue', 'Power Outage', 'Meter Reading Issue'];
 
@@ -22,7 +33,9 @@ export class RegisterComplaintsComponent {
       complaintType: ['', Validators.required],
       category: ['', Validators.required],
       description: ['', [Validators.required, Validators.maxLength(500)]],
-      preferredContactMethod: ['email', Validators.required],
+      email: ['', Validators.required],
+      landmark: ['', Validators.required],
+      mobileNumber: ['', Validators.required],
       contactDetails: [
         { value: this.contactInfo.email, disabled: false },
         [Validators.required, Validators.email],
@@ -60,14 +73,29 @@ export class RegisterComplaintsComponent {
       const resolutionTime =
         this.complaintForm.value.complaintType === 'Power Outage'
           ? '1-2 hours'
-          : '2-5 days'; // Estimate resolution time
+          : '2-5 days';
 
-      // Display confirmation with complaint details
-      alert(`Complaint Submitted Successfully!
-        \nComplaint ID: ${complaintId}
-        \nResolution Time: ${resolutionTime}
-        \nDetails: ${JSON.stringify(this.complaintForm.value)}
-      `);
+      const currentUser = JSON.parse(localStorage.getItem('user') as string);
+      this.complaintForm.value.consumerId = currentUser.customerId;
+      this.complaintForm.value.dateRegistered = new Date().toDateString();
+      this.complaintForm.value.resolutinTime = new Date().getTime();
+      this.complaintForm.value.status = 'Pending';
+      console.log('this.complaintForm.value', this.complaintForm.value);
+      this.apiService.createComplaint(this.complaintForm.value).subscribe({
+        next(value) {
+          console.log(value);
+        },
+        error(err) {
+          console.log(err);
+        },
+      });
+
+      // // Display confirmation with complaint details
+      // alert(`Complaint Submitted Successfully!
+      //   \nComplaint ID: ${complaintId}
+      //   \nResolution Time: ${resolutionTime}
+      //   \nDetails: ${JSON.stringify(this.complaintForm.value)}
+      // `);
     } else {
       alert('Please fill in all the required fields correctly.');
     }
@@ -79,6 +107,6 @@ export class RegisterComplaintsComponent {
   }
 
   handleBack() {
-    this.location.back()
+    this.location.back();
   }
 }

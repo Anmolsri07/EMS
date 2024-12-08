@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ApiService } from '../../service/api.service';
+import { IBill } from '../../interfaces/bills';
 
 @Component({
   selector: 'app-add-bill',
@@ -9,16 +11,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './add-bill.component.scss',
 })
 export class AddBillComponent {
-  bill = {
+  constructor(private apiService: ApiService) {}
+  bill: IBill = {
     consumerId: '',
-    billingPeriod: '',
+    billNumber: '',
+    paymentStatus: '',
     billDate: '',
     dueDate: '',
-    disconnectionDate: '',
-    billAmount: 0,
-    lateFee: 0,
-    status: '',
+    billAmount: '',
+    payableAmount: '',
+    electricityUsage: ''
   };
+
   errors: any = {};
   message = '';
   messageType = '';
@@ -33,11 +37,9 @@ export class AddBillComponent {
   }
 
   checkDuplicateBill() {
-    // Call API to check for duplicate bills
-    if (this.bill.consumerId && this.bill.billingPeriod) {
+    if (this.bill.consumerId && this.bill.dueDate) {
       // Example check
       if (false) {
-        // Replace with actual check
         this.errors.billingPeriod = 'A bill for this period already exists.';
       } else {
         this.errors.billingPeriod = '';
@@ -55,7 +57,17 @@ export class AddBillComponent {
 
   saveBill(event: Event) {
     event.preventDefault();
-    // Validate inputs and save bill logic here
+    // this.apiService.getCustomerByCustomerId()
+    console.log('this.this.bill', this.bill);
+
+    this.apiService.createBill(this.bill).subscribe({
+      next: (value) => {
+        console.log(value);
+      },
+      error: (err) => {},
+      complete: () => {},
+    });
+    console.log(this.bill);
   }
 
   goToDashboard() {

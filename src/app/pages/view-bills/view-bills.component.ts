@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ApiService } from '../../service/api.service';
+import { IViewBill } from '../../interfaces/bills';
 
 @Component({
   selector: 'app-view-bills',
@@ -10,53 +12,34 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './view-bills.component.scss',
 })
 export class ViewBillsComponent {
-  bills = [
-    {
-      consumerId: 'C001',
-      billNumber: 'B001',
-      paymentStatus: 'Unpaid',
-      connectionType: 'Domestic',
-      connectionStatus: 'Connected',
-      mobileNumber: '1234567890',
-      billPeriod: 'Jan 2024',
-      billDate: '2024-01-01',
-      dueDate: '2024-01-15',
-      disconnectionDate: '',
-      dueAmount: 500,
-      payableAmount: 500,
-      selected: false,
-    },
-    {
-      consumerId: 'C002',
-      billNumber: 'B002',
-      paymentStatus: 'Unpaid',
-      connectionType: 'Commercial',
-      connectionStatus: 'Connected',
-      mobileNumber: '0987654321',
-      billPeriod: 'Feb 2024',
-      billDate: '2024-02-01',
-      dueDate: '2024-02-15',
-      disconnectionDate: '',
-      dueAmount: 700,
-      payableAmount: 700,
-      selected: false,
-    },
-    // More bills can be added here
-  ];
+  bills: IViewBill[] = [];
 
   totalAmount: number = 0;
 
-  constructor(private router: Router, private location: Location) {}
+  constructor(
+    private router: Router,
+    private location: Location,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit(): void {
     this.updateTotal();
+    const currentUser = JSON.parse(localStorage.getItem('user') as string);
+    this.apiService.getAllBills(currentUser.customerId).subscribe({
+      next(value) {
+        // ?? Avoid returning a plain string when no data is found; it's not a good practice for server responses.
+        console.log(value);
+      },
+    });
   }
 
   // Update total amount based on selected bills
   updateTotal(): void {
-    this.totalAmount = this.bills
-      .filter((bill) => bill.selected)
-      .reduce((sum, bill) => sum + (bill.payableAmount || bill.dueAmount), 0);
+    // this.totalAmount = this.bills
+    //   .filter((bill) => bill.selected).reduce(
+    //     (sum, bill) => sum + (+bill.bill_amount || +bill.payable_amount),
+    //     0
+    //   );
   }
 
   // Select or deselect all bills
@@ -78,6 +61,6 @@ export class ViewBillsComponent {
   }
 
   handleBack() {
-    this.location.back()
+    this.location.back();
   }
 }

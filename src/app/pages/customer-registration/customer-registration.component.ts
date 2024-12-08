@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
 })
 export class CustomerRegistrationComponent {
   registrationForm: FormGroup;
+  isCreating: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -65,22 +66,30 @@ export class CustomerRegistrationComponent {
         alert('Confirm your password?');
         return;
       }
+      this.isCreating = true;
 
       this.apiService.createNewCustomer(this.registrationForm.value).subscribe({
-        next: (value)=> {
-          console.log(value);
-          this.router.navigate(['/login'])
+        next: (value) => {
+          if (typeof value !== 'string') {
+            alert('Customer registration fail?');
+            return;
+          } else {
+            alert('Customer registration successfully');
+            this.router.navigate(['/login']);
+          }
         },
         error(err) {
-          alert(err)
+          alert(JSON.stringify(err));
         },
-      })
-
+        complete: () => {
+          this.isCreating = false;
+        },
+      });
     }
   }
 
   handleBack() {
-    this.location.back()
+    this.location.back();
   }
 
   get name(): AbstractControl {

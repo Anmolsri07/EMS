@@ -12,15 +12,10 @@
             <th>Consumer ID</th>
             <th>Bill Number</th>
             <th>Payment Status</th>
-            <th>Connection Type</th>
-            <!-- <th>Connection Status</th> -->
-            <!-- <th>Mobile Number</th> -->
-            <th>Bill Period</th>
             <th>Bill Date</th>
-            <th>Due Date</th>
-            <!-- <th>Disconnection Date</th> -->
-            <th>Due Amount</th>
+            <th>Due bill</th>
             <th>Payable Amount</th>
+            <th>Electricity Usage</th>
           </tr>
         </thead>
         <tbody>
@@ -32,7 +27,7 @@
                 (change)="updateTotal()"
               />
             </td>
-            <td>{{ bill.consumerId }}</td>
+            <td>{{ bill.billAmount }}</td>
             <td>{{ bill.billNumber }}</td>
             <td
               [ngClass]="{
@@ -42,14 +37,10 @@
             >
               {{ bill.paymentStatus }}
             </td>
-            <td>{{ bill.connectionType }}</td>
-            <!-- <td>{{ bill.connectionStatus }}</td> -->
-            <!-- <td>{{ bill.mobileNumber }}</td> -->
-            <td>{{ bill.billPeriod }}</td>
             <td>{{ bill.billDate }}</td>
             <td>{{ bill.dueDate }}</td>
-            <!-- <td>{{ bill.disconnectionDate || "N/A" }}</td> -->
-            <td>{{ bill.dueAmount | currency }}</td>
+            <td>{{ bill.billAmount }}</td>
+           <td>{{ bill.electricityUsage }}</td>
             <td>
               <input
                 type="number"

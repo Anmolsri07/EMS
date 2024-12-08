@@ -62,16 +62,16 @@
 
             <!-- Phone Number -->
             <div class="mb-3">
-              <label for="phoneNumber" class="form-label">Phone Number</label>
+              <label for="mobileNumber" class="form-label">Phone Number</label>
               <input
                 type="text"
-                id="phoneNumber"
+                id="mobileNumber"
                 class="form-control"
-                formControlName="phoneNumber"
+                formControlName="mobileNumber"
                 placeholder="Enter phone number"
               />
               <div
-                *ngIf="addCustomerForm.get('phoneNumber')?.invalid && addCustomerForm.get('phoneNumber')?.touched"
+                *ngIf="addCustomerForm.get('mobileNumber')?.invalid && addCustomerForm.get('mobileNumber')?.touched"
                 class="text-danger mt-1"
               >
                 Enter a valid phone number.
