@@ -84,12 +84,12 @@
         type="text"
         id="contact"
         class="form-control"
-        [(ngModel)]="consumer.contact"
+        [(ngModel)]="consumer.mobileNumber"
         name="contact"
         required
       />
       <div
-        *ngIf="consumerForm.submitted && !consumer.contact"
+        *ngIf="consumerForm.submitted && !consumer.mobileNumber"
         class="text-danger"
       >
         Contact information is required.

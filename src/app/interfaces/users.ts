@@ -26,3 +26,17 @@ export interface ICustomers {
   confirmPassword: string;
   role: UserType;
 }
+
+// private long consumerId;
+// private long customerId;
+// private String address;
+// private String mobileNumber;
+// private String customerType;
+
+export interface IConsumer {
+  consumerId: string;
+  customerId: string;
+  address: string;
+  mobileNumber: string;
+  customerType: CustomerType;
+}

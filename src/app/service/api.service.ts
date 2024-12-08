@@ -23,4 +23,10 @@ export class ApiService {
   createNewCustomer(payload: ICustomers) {
     return this.http.post(`${this.baseUrl}/api/customers/register`, payload)
   }
+
+  getCustomerByCustomerId(customerId: string) {
+    return this.http.get(
+      `${this.baseUrl}/apiAdmin/getAllConsumers/${customerId}`
+    );
+  }
 }
