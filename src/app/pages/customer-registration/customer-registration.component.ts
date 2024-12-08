@@ -74,7 +74,7 @@ export class CustomerRegistrationComponent {
             alert('Customer registration fail?');
             return;
           } else {
-            alert('Customer registration successfully');
+            alert('Customer registration successfully' + value);
             this.router.navigate(['/login']);
           }
         },
