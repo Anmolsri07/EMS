@@ -84,11 +84,17 @@ export class RegisterComplaintsComponent {
       this.complaintForm.value.status = 'Pending';
       console.log('this.complaintForm.value', this.complaintForm.value);
       this.apiService.createComplaint(this.complaintForm.value).subscribe({
-        next(value) {
-          console.log(value);
+        next:(value)=> {
+          if(typeof value === 'string') {
+            alert(value);
+            return;
+          } else {
+            alert('Complaint register success')
+            this.location.back();
+          }
         },
         error(err) {
-          console.log(err);
+          alert(JSON.stringify(err));
         },
       });
 

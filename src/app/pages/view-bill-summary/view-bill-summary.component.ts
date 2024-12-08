@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './view-bill-summary.component.scss',
 })
 export class ViewBillSummaryComponent {
+
   bills = [
     {
       consumerId: 'C001',
@@ -35,7 +36,7 @@ export class ViewBillSummaryComponent {
   selectedPaymentMethod: string = '';
   error: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private location: Location) {}
 
   ngOnInit(): void {
     // For now, simulate loading of bills
@@ -58,7 +59,7 @@ export class ViewBillSummaryComponent {
 
   // Go back to the previous page
   goBack(): void {
-    this.router.navigate(['/previous']);
+    this.location.back()
   }
 
   // Retry loading bills
