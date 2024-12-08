@@ -7,7 +7,7 @@
 <router-outlet />
 
 
-<footer class="bg-dark text-light py-4">
+<footer class="bg-dark text-light py-4" *ngIf="currentUser">
   <div class="container">
     <div class="row">
       <!-- About Section -->
@@ -44,6 +44,16 @@
 
     <!-- Copyright -->
     <div class="text-center mt-3">
+      <p class="mb-0">&copy; 2024 Electric Management System. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+
+<footer class="bg-dark text-light py-2 py-3" *ngIf="!currentUser">
+  <div class="container">
+    <!-- Copyright -->
+    <div class="text-center">
       <p class="mb-0">&copy; 2024 Electric Management System. All rights reserved.</p>
     </div>
   </div>
