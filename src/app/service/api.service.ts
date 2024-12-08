@@ -8,17 +8,17 @@ import { ICustomers, ILogin } from '../interfaces/users';
 })
 export class ApiService {
   private readonly baseUrl = environment.SERVER_URL
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  loginCustomer(payload: ILogin){
+  loginCustomer(payload: ILogin) {
     // TODO: Add customer login endpoint 👇
-    return this.http.post(`${this.baseUrl}/api/customers/register`, payload);
+    return this.http.post(`${this.baseUrl}/api/auth/login`, payload);
   }
 
-  loginAdmin(payload: ILogin){
-    // TODO: Add admin login endpoint 👇
-    return this.http.post(`${this.baseUrl}/api/customers/register`, payload);
-  }
+  // loginAdmin(payload: ILogin) {
+  //   // TODO: Add admin login endpoint 👇
+  //   return this.http.post(`${this.baseUrl}/api/admin/login`, payload);
+  // }
 
   createNewCustomer(payload: ICustomers) {
     return this.http.post(`${this.baseUrl}/api/customers/register`, payload)

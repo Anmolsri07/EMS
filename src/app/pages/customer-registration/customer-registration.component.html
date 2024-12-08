@@ -1,96 +1,100 @@
-<div class="container my-5 w-100">
-  <form class="register" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-    <h2 class="mb-4 heading">Customer Registration Form</h2>
+<div class="background-container">
+  <div class="container my-5 w-100">
+    <form class="register" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <h2 class="mb-4 heading">Customer Registration Form</h2>
 
-    <!-- Full Name -->
-    <div class="mb-3">
-      <label for="name" class="form-label">Full Name</label>
-      <input type="text" id="name" class="form-control" formControlName="name" />
-      <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="text-danger">
-        <small *ngIf="name?.hasError('required')">Full Name is required.</small>
-        <small *ngIf="name?.hasError('pattern')">Name should only contain letters.</small>
+      <!-- Full Name -->
+      <div class="mb-3">
+        <label for="name" class="form-label">Full Name</label>
+        <input type="text" id="name" class="form-control" formControlName="name" />
+        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="text-danger">
+          <small *ngIf="name?.hasError('required')">Full Name is required.</small>
+          <small *ngIf="name?.hasError('pattern')">Name should only contain letters.</small>
+        </div>
       </div>
-    </div>
 
-    <!-- Address -->
-    <div class="mb-3">
-      <label for="address" class="form-label">Address</label>
-      <textarea id="address" class="form-control" formControlName="address"></textarea>
-      <div *ngIf="address?.invalid && (address?.dirty || address?.touched)" class="text-danger">
-        <small *ngIf="address?.hasError('required')">Address is required.</small>
+      <!-- Address -->
+      <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <textarea id="address" class="form-control" formControlName="address"></textarea>
+        <div *ngIf="address?.invalid && (address?.dirty || address?.touched)" class="text-danger">
+          <small *ngIf="address?.hasError('required')">Address is required.</small>
+        </div>
       </div>
-    </div>
 
-    <!-- Email -->
-    <div class="mb-3">
-      <label for="email" class="form-label">Email</label>
-      <input type="email" id="email" class="form-control" formControlName="email" />
-      <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="text-danger">
-        <small *ngIf="email?.hasError('required')">Email is required.</small>
-        <small *ngIf="email?.hasError('email')">Please enter a valid email address.</small>
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" class="form-control" formControlName="email" />
+        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="text-danger">
+          <small *ngIf="email?.hasError('required')">Email is required.</small>
+          <small *ngIf="email?.hasError('email')">Please enter a valid email address.</small>
+        </div>
       </div>
-    </div>
 
-    <!-- Mobile Number -->
-    <div class="mb-3">
-      <label for="mobile" class="form-label">Mobile Number</label>
-      <input type="text" id="mobile" class="form-control" formControlName="mobileNumber" />
-      <div *ngIf="mobileNumber?.invalid && (mobileNumber?.dirty || mobileNumber?.touched)" class="text-danger">
-        <small *ngIf="mobileNumber?.hasError('required')">Mobile Number is required.</small>
-        <small *ngIf="mobileNumber?.hasError('pattern')">Please enter a valid mobile number.</small>
+      <!-- Mobile Number -->
+      <div class="mb-3">
+        <label for="mobile" class="form-label">Mobile Number</label>
+        <input type="text" id="mobile" class="form-control" formControlName="mobileNumber" />
+        <div *ngIf="mobileNumber?.invalid && (mobileNumber?.dirty || mobileNumber?.touched)" class="text-danger">
+          <small *ngIf="mobileNumber?.hasError('required')">Mobile Number is required.</small>
+          <small *ngIf="mobileNumber?.hasError('pattern')">Please enter a valid mobile number.</small>
+        </div>
       </div>
-    </div>
 
-    <!-- Customer Type -->
-    <div class="mb-3">
-      <label class="form-label">Customer Type</label>
-      <select class="form-select" formControlName="customerType" title="Customer type">
-        <option value="">Select</option>
-        <option value="residential">Residential</option>
-        <option value="commercial">Commercial</option>
-      </select>
-      <div *ngIf="customerType?.hasError('required') && (customerType?.dirty || customerType?.touched)"
-        class="text-danger">
-        <small>Customer Type is required.</small>
+      <!-- Customer Type -->
+      <div class="mb-3">
+        <label class="form-label">Customer Type</label>
+        <select class="form-select" formControlName="customerType" title="Customer type">
+          <option value="">Select</option>
+          <option value="Residential">Residential</option>
+          <option value="Commercial">Commercial</option>
+        </select>
+        <div *ngIf="customerType?.hasError('required') && (customerType?.dirty || customerType?.touched)"
+          class="text-danger">
+          <small>Customer Type is required.</small>
+        </div>
       </div>
-    </div>
 
-    <!-- User ID -->
-    <div class="mb-3">
-      <label for="userId" class="form-label">User ID</label>
-      <input type="text" id="userId" class="form-control" formControlName="userId" />
-      <div *ngIf="userId?.invalid && (userId?.dirty || userId?.touched)" class="text-danger">
-        <small *ngIf="userId?.hasError('required')">User ID is required.</small>
-        <small *ngIf="userId?.hasError('minlength')">User ID must be at least 5 characters.</small>
-        <small *ngIf="userId?.hasError('maxlength')">User ID cannot exceed 20 characters.</small>
+      <!-- User ID -->
+      <div class="mb-3">
+        <label for="userId" class="form-label">User ID</label>
+        <input type="text" id="userId" class="form-control" formControlName="userId" />
+        <div *ngIf="userId?.invalid && (userId?.dirty || userId?.touched)" class="text-danger">
+          <small *ngIf="userId?.hasError('required')">User ID is required.</small>
+          <small *ngIf="userId?.hasError('minlength')">User ID must be at least 5 characters.</small>
+          <small *ngIf="userId?.hasError('maxlength')">User ID cannot exceed 20 characters.</small>
+        </div>
       </div>
-    </div>
 
-    <!-- Password -->
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" id="password" class="form-control" formControlName="password" />
-      <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="text-danger">
-        <small *ngIf="password?.hasError('required')">Password is required.</small>
-        <small *ngIf="password?.hasError('pattern')">
-          Password must be at least 8 characters long, include uppercase, lowercase, a number, and a special character.
-        </small>
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" class="form-control" formControlName="password" />
+        <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="text-danger">
+          <small *ngIf="password?.hasError('required')">Password is required.</small>
+          <small *ngIf="password?.hasError('pattern')">
+            Password must be at least 8 characters long, include uppercase, lowercase, a number, and a special
+            character.
+          </small>
+        </div>
       </div>
-    </div>
 
-    <!-- Confirm Password -->
-    <div class="mb-3">
-      <label for="confirmPassword" class="form-label">Confirm Password</label>
-      <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword" />
-      <div *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)" class="text-danger">
-        <small *ngIf="confirmPassword?.hasError('required')">Please confirm your password.</small>
-        <small *ngIf="confirmPassword?.hasError('mismatch')">Passwords do not match.</small>
+      <!-- Confirm Password -->
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword" />
+        <div *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)"
+          class="text-danger">
+          <small *ngIf="confirmPassword?.hasError('required')">Please confirm your password.</small>
+          <small *ngIf="confirmPassword?.hasError('mismatch')">Passwords do not match.</small>
+        </div>
       </div>
-    </div>
 
-    <div class="d-flex align-items-center justify-content-between">
-      <button type="button" class="btn btn-warning mb-4 mt-3" (click)="handleBack()">Back</button>
-      <button type="submit" class="btn btn-dark mb-4 mt-3" >Register</button>
-    </div>
-  </form>
+      <div class="d-flex align-items-center justify-content-between">
+        <button type="button" class="btn btn-warning mb-4 mt-3" (click)="handleBack()">Back</button>
+        <button type="submit" class="btn btn-dark mb-4 mt-3">Register</button>
+      </div>
+    </form>
+  </div>
 </div>

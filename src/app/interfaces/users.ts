@@ -9,8 +9,9 @@ export enum UserType {
 }
 
 export interface ILogin {
-  username: string;
+  userId: string;
   password: string;
+  role: UserType;
 }
 
 
@@ -24,4 +25,5 @@ export interface ICustomers {
   userId: string;
   password: string;
   confirmPassword: string;
+
 }
