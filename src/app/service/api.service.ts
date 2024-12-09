@@ -10,7 +10,7 @@ import { IComplaint } from '../interfaces/complaint';
 })
 export class ApiService {
   private readonly baseUrl = environment.SERVER_URL;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   loginCustomer(payload: ILogin) {
     // TODO: Add customer login endpoint 👇
@@ -25,7 +25,7 @@ export class ApiService {
   createNewCustomer(payload: ICustomers) {
     return this.http.post(`${this.baseUrl}/api/customers/register`, payload);
   }
-
+  ///search
   getConsumerByCustomerId(customerId: string) {
     return this.http.get(
       `${this.baseUrl}/apiAdmin/getAllConsumers/${customerId}`

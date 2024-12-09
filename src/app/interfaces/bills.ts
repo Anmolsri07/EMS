@@ -1,7 +1,7 @@
 export interface IBill {
   consumerId: string;
-  billNumber: string;
-  paymentStatus: string;
+
+  paymentStatus: number;
   billDate: string;
   dueDate: string;
   billAmount: string;

@@ -7,51 +7,23 @@
     <!-- Consumer ID -->
     <div class="mb-3">
       <label for="consumerId" class="form-label">Consumer ID</label>
-      <input
-        type="text"
-        class="form-control"
-        id="consumerId"
-        [(ngModel)]="bill.consumerId"
-        name="consumerId"
-        (blur)="validateConsumerId()"
-        required
-      />
+      <input type="text" class="form-control" id="consumerId" [(ngModel)]="bill.consumerId" name="consumerId"
+        (blur)="validateConsumerId()" required />
       <div *ngIf="errors.consumerId" class="text-danger">
         {{ errors.consumerId }}
       </div>
     </div>
 
     <!-- Billing Period -->
-    <div class="mb-3">
-      <label for="billingPeriod" class="form-label">Bill Number</label>
-      <input
-        type="text"
-        class="form-control"
-        id="billingPeriod"
-        [(ngModel)]="bill.billNumber"
-        name="billNumber"
-        (blur)="checkDuplicateBill()"
-        required
-      />
-      <div *ngIf="errors.billNumber" class="text-danger">
-        {{ errors.billNumber }}
-      </div>
-    </div>
+
 
 
 
     <!-- Due Date -->
     <div class="mb-3">
       <label for="dueDate" class="form-label">Bill Date</label>
-      <input
-        type="date"
-        class="form-control"
-        id="dueDate"
-        [(ngModel)]="bill.billDate"
-        name="billDate"
-        (change)="validateDates()"
-        required
-      />
+      <input type="date" class="form-control" id="dueDate" [(ngModel)]="bill.billDate" name="billDate"
+        (change)="validateDates()" required />
       <div *ngIf="errors.billDate" class="text-danger">
         {{ errors.billDate }}
       </div>
@@ -60,27 +32,14 @@
     <!-- Disconnection Date -->
     <div class="mb-3">
       <label for="disconnectionDate" class="form-label">Due Date</label>
-      <input
-        type="date"
-        class="form-control"
-        id="disconnectionDate"
-        [(ngModel)]="bill.dueDate"
-        name="dueDate"
-      />
+      <input type="date" class="form-control" id="disconnectionDate" [(ngModel)]="bill.dueDate" name="dueDate" />
     </div>
 
     <!-- Bill Amount -->
     <div class="mb-3">
       <label for="billAmount" class="form-label">Bill Amount</label>
-      <input
-        type="number"
-        class="form-control"
-        id="billAmount"
-        [(ngModel)]="bill.billAmount"
-        name="billAmount"
-        min="0"
-        required
-      />
+      <input type="number" class="form-control" id="billAmount" [(ngModel)]="bill.billAmount" name="billAmount" min="0"
+        required />
       <div *ngIf="errors.billAmount" class="text-danger">
         {{ errors.billAmount }}
       </div>
@@ -88,15 +47,8 @@
 
     <div class="mb-3">
       <label for="billAmount" class="form-label">Payable Amount</label>
-      <input
-        type="number"
-        class="form-control"
-        id="billAmount"
-        [(ngModel)]="bill.payableAmount"
-        name="payableAmount"
-        min="0"
-        required
-      />
+      <input type="number" class="form-control" id="billAmount" [(ngModel)]="bill.payableAmount" name="payableAmount"
+        min="0" required />
       <div *ngIf="errors.payableAmount" class="text-danger">
         {{ errors.payableAmount }}
       </div>
@@ -104,15 +56,8 @@
 
     <div class="mb-3">
       <label for="billAmount" class="form-label">Electricity Usage</label>
-      <input
-        type="number"
-        class="form-control"
-        id="billAmount"
-        [(ngModel)]="bill.electricityUsage"
-        name="electricityUsage"
-        min="0"
-        required
-      />
+      <input type="number" class="form-control" id="billAmount" [(ngModel)]="bill.electricityUsage"
+        name="electricityUsage" min="0" required />
       <div *ngIf="errors.electricityUsage" class="text-danger">
         {{ errors.electricityUsage }}
       </div>
@@ -121,16 +66,10 @@
     <!-- Status -->
     <div class="mb-3">
       <label for="status" class="form-label">Payment Status</label>
-      <select
-        class="form-select"
-        id="status"
-        [(ngModel)]="bill.paymentStatus"
-        name="paymentStatus"
-        required
-      >
+      <select class="form-select" id="status" [(ngModel)]="bill.paymentStatus" name="paymentStatus" required>
         <option value="" disabled>Select Status</option>
-        <option value="Unpaid">Unpaid</option>
-        <option value="Paid">Paid</option>
+        <option value="0">Unpaid</option>
+        <option value="1">Paid</option>
       </select>
       <div *ngIf="errors.paymentStatus" class="text-danger">{{ errors.paymentStatus }}</div>
     </div>

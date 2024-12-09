@@ -1,3 +1,3 @@
 export const environment = {
-  SERVER_URL: 'http://localhost:8080',
+  SERVER_URL: 'https://62rsb8hv-8080.inc1.devtunnels.ms',
 };

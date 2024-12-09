@@ -12,11 +12,11 @@ import { Router } from '@angular/router';
   styleUrl: './add-bill.component.scss',
 })
 export class AddBillComponent {
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router) { }
   bill: IBill = {
     consumerId: '',
-    billNumber: '',
-    paymentStatus: '',
+
+    paymentStatus: 0,
     billDate: '',
     dueDate: '',
     billAmount: '',
@@ -65,13 +65,13 @@ export class AddBillComponent {
       next: (value) => {
         console.log(value);
       },
-      error: (err) => {},
-      complete: () => {},
+      error: (err) => { },
+      complete: () => { },
     });
     console.log(this.bill);
   }
 
   goToDashboard() {
-   this.router.navigate(['/home'])
+    this.router.navigate(['/home'])
   }
 }
