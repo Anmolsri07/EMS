@@ -18,7 +18,10 @@
                 placeholder="Enter full name"
               />
               <div
-                *ngIf="addCustomerForm.get('name')?.invalid && addCustomerForm.get('name')?.touched"
+                *ngIf="
+                  addCustomerForm.get('name')?.invalid &&
+                  addCustomerForm.get('name')?.touched
+                "
                 class="text-danger mt-1"
               >
                 Full Name is required.
@@ -35,28 +38,13 @@
                 placeholder="Enter address"
               ></textarea>
               <div
-                *ngIf="addCustomerForm.get('address')?.invalid && addCustomerForm.get('address')?.touched"
+                *ngIf="
+                  addCustomerForm.get('address')?.invalid &&
+                  addCustomerForm.get('address')?.touched
+                "
                 class="text-danger mt-1"
               >
                 Address is required.
-              </div>
-            </div>
-
-            <!-- Consumer Number -->
-            <div class="mb-3">
-              <label for="customerId" class="form-label">Consumer Number</label>
-              <input
-                type="text"
-                id="customerId"
-                class="form-control"
-                formControlName="customerId"
-                placeholder="Enter consumer number"
-              />
-              <div
-                *ngIf="addCustomerForm.get('customerId')?.invalid && addCustomerForm.get('customerId')?.touched"
-                class="text-danger mt-1"
-              >
-                Consumer Number is required (min 5 characters).
               </div>
             </div>
 
@@ -71,7 +59,10 @@
                 placeholder="Enter phone number"
               />
               <div
-                *ngIf="addCustomerForm.get('mobileNumber')?.invalid && addCustomerForm.get('mobileNumber')?.touched"
+                *ngIf="
+                  addCustomerForm.get('mobileNumber')?.invalid &&
+                  addCustomerForm.get('mobileNumber')?.touched
+                "
                 class="text-danger mt-1"
               >
                 Enter a valid phone number.
@@ -89,7 +80,10 @@
                 placeholder="Enter email"
               />
               <div
-                *ngIf="addCustomerForm.get('email')?.invalid && addCustomerForm.get('email')?.touched"
+                *ngIf="
+                  addCustomerForm.get('email')?.invalid &&
+                  addCustomerForm.get('email')?.touched
+                "
                 class="text-danger mt-1"
               >
                 Enter a valid email address.
@@ -109,7 +103,10 @@
                 <option value="Commercial">Commercial</option>
               </select>
               <div
-                *ngIf="addCustomerForm.get('customerType')?.invalid && addCustomerForm.get('customerType')?.touched"
+                *ngIf="
+                  addCustomerForm.get('customerType')?.invalid &&
+                  addCustomerForm.get('customerType')?.touched
+                "
                 class="text-danger mt-1"
               >
                 Customer Type is required.
@@ -127,7 +124,10 @@
                 placeholder="Enter user ID"
               />
               <div
-                *ngIf="addCustomerForm.get('userId')?.invalid && addCustomerForm.get('userId')?.touched"
+                *ngIf="
+                  addCustomerForm.get('userId')?.invalid &&
+                  addCustomerForm.get('userId')?.touched
+                "
                 class="text-danger mt-1"
               >
                 User ID must be between 5 and 20 characters.
@@ -136,7 +136,13 @@
 
             <!-- Submit Button -->
             <div class="d-flex align-items-center justify-content-between mt-4">
-              <button type="button" class="btn btn-warning" (click)="handleBack()">Back</button>
+              <button
+                type="button"
+                class="btn btn-warning"
+                (click)="handleBack()"
+              >
+                Back
+              </button>
               <button
                 type="submit"
                 class="btn btn-primary"
@@ -144,7 +150,6 @@
               >
                 Add Customer
               </button>
-
             </div>
           </form>
         </div>

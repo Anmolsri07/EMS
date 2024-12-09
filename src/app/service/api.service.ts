@@ -4,13 +4,14 @@ import { environment } from '../../environments/environment';
 import { ICustomers, ILogin } from '../interfaces/users';
 import { IBill } from '../interfaces/bills';
 import { IComplaint } from '../interfaces/complaint';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   private readonly baseUrl = environment.SERVER_URL;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   loginCustomer(payload: ILogin) {
     // TODO: Add customer login endpoint 👇
@@ -29,6 +30,12 @@ export class ApiService {
   getConsumerByCustomerId(customerId: string) {
     return this.http.get(
       `${this.baseUrl}/apiAdmin/getAllConsumers/${customerId}`
+    );
+  }
+
+  getAllConsumers(ConsumersId: string) {
+    return this.http.get(
+      `${this.baseUrl}/apiAdmin/getAllConsumerId/${ConsumersId}`
     );
   }
 

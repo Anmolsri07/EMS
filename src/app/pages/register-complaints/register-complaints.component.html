@@ -5,6 +5,29 @@
     </div>
     <div class="card-body">
       <form [formGroup]="complaintForm" (ngSubmit)="onSubmit()">
+
+         <div class="mb-4">
+          <label for="consumerId" class="form-label">Consumer Id</label>
+          <select
+            id="consumerId"
+            class="form-select"
+            formControlName="consumerId"
+          >
+            <option value="">Select Consumer Id</option>
+            <option *ngFor="let consumerId of consumerIds" [value]="consumerId">
+              {{ consumerId }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              complaintForm.get('consumerId')?.invalid &&
+              complaintForm.get('consumerId')?.touched
+            "
+            class="text-danger"
+          >
+            consumerId is required.
+          </div>
+        </div>
         <div class="mb-4">
           <label for="complaintType" class="form-label">Complaint Type</label>
           <select
@@ -161,9 +184,9 @@
             <button
               type="submit"
               class="btn btn-success"
-              [disabled]="complaintForm.invalid"
+              [disabled]="complaintForm.invalid || isCreating"
             >
-              Submit
+              {{isCreating ? 'Loading': 'Submit'}}
             </button>
             <button
               type="button"
