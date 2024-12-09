@@ -97,13 +97,17 @@
         </div>
 
         <!-- Submit Button -->
-        <button
-          type="submit"
-          class="btn btn-primary"
-          [disabled]="paymentForm.invalid"
-        >
-          Submit Payment
-        </button>
+        <div class="d-flex aligin-items-center gap-4">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="paymentForm.invalid"
+          >
+            Submit Payment
+          </button>
+
+          <button class="btn btn-warning" type="button" (click)="goBack()">Back</button>
+        </div>
       </form>
     </div>
   </div>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../service/api.service';
 
@@ -11,7 +11,11 @@ import { ApiService } from '../../service/api.service';
   styleUrl: './pay-bill.component.scss',
 })
 export class PayBillComponent {
-  constructor(private route: ActivatedRoute, private apiService: ApiService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private apiService: ApiService,
+    private location: Location
+  ) {}
 
   cardDetails = {
     cardNumber: '',
@@ -68,15 +72,15 @@ export class PayBillComponent {
   // Show the successful payment confirmation
   showPaymentConfirmation(): void {
     this.apiService
-    .payBill('Credit Card', this.billNumber, this.totalAmount)
-    .subscribe({
-      next: (value) => {
+      .payBill('Credit Card', this.billNumber, this.totalAmount)
+      .subscribe({
+        next: (value) => {
           alert('Payment Successful!');
           console.log(value);
         },
-        error: ()=> {
-          alert('payment fail')
-        }
+        error: () => {
+          alert('payment fail');
+        },
       });
 
     // Navigate to the success page with transaction details
@@ -87,5 +91,9 @@ export class PayBillComponent {
   // Cancel payment and go back
   cancelPayment(): void {
     this.paymentConfirmed = false;
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
