@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { ICustomers, ILogin } from '../interfaces/users';
+import { IConsumer, ICustomers, ILogin } from '../interfaces/users';
 import { IBill } from '../interfaces/bills';
 import { IComplaint } from '../interfaces/complaint';
 import { Observable } from 'rxjs';
@@ -26,6 +26,15 @@ export class ApiService {
   createNewCustomer(payload: ICustomers) {
     return this.http.post(`${this.baseUrl}/api/customers/register`, payload);
   }
+
+  createNewConsumer(payload: IConsumer) {
+    return this.http.post(`${this.baseUrl}/apiAdmin/addNewConsumer`, payload);
+  }
+
+  updateConsumer(payload: Partial<IConsumer>) {
+    return this.http.patch(`${this.baseUrl}/apiAdmin/updateConsumer`, payload);
+  }
+
   ///search
   getConsumerByCustomerId(customerId: string) {
     return this.http.get(
@@ -37,6 +46,10 @@ export class ApiService {
     return this.http.get(
       `${this.baseUrl}/apiAdmin/getAllConsumerId/${ConsumersId}`
     );
+  }
+
+  getAdminAllConsumers() {
+    return this.http.get(`${this.baseUrl}/apiAdmin/viewAllConsumers`);
   }
 
   createBill(payload: IBill) {
@@ -65,6 +78,6 @@ export class ApiService {
   }
 
   getAdminAllBills() {
-    return this.http.get(`${this.baseUrl}/apiAdmin/viewBill`)
+    return this.http.get(`${this.baseUrl}/apiAdmin/viewBill`);
   }
 }

@@ -18,14 +18,14 @@ export class AddConsumerComponent {
   searchQuery: string = '';
   customers: any[] = [];
   searchCompleted: boolean = false;
-  customerId: string | null = null
+  customerId: string | null = null;
 
   consumer: IConsumer = {
     consumerId: '',
     address: '',
     mobileNumber: '',
     customerType: CustomerType.COMMERCIAL,
-    customerId: ''
+    customerId: '',
   };
 
   successMessage: string = '';
@@ -49,16 +49,22 @@ export class AddConsumerComponent {
     });
   }
 
-  selectCustomer(customer: any) {
-    console.log('Selected customer:', customer);
+  selectCustomer(customer: IConsumer) {
+    console.log('Selected customer:', customer.customerId);
     // Handle customer selection
+    this.consumer.consumerId = `${customer.consumerId}`;
   }
 
   submitForm() {
-    if(!this.customerId) {
-      alert('Select customer')
-      return;
-    }
+    this.apiService.createNewConsumer(this.consumer).subscribe({
+      next: (value) => {
+        alert(value);
+        if (typeof value === 'string') this.successMessage = value;
+      },
+      error(err) {
+        alert(JSON.stringify(err));
+      },
+    });
     // if (
     //   this.consumer.consumerId &&
     //   this.consumer.address &&
@@ -84,7 +90,7 @@ export class AddConsumerComponent {
       address: '',
       mobileNumber: '',
       customerType: CustomerType.COMMERCIAL,
-      customerId: ''
+      customerId: '',
     };
   }
 

@@ -1,6 +1,8 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ApiService } from '../../service/api.service';
+import { IConsumer } from '../../interfaces/users';
 
 @Component({
   selector: 'app-update-consumer',
@@ -9,23 +11,28 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './update-consumer.component.scss',
 })
 export class UpdateConsumerComponent {
-  constructor(private location: Location) {}
+  constructor(
+    private location: Location,
+    private readonly apiService: ApiService
+  ) {}
   searchQuery: string = '';
-  searchResults: any[] = [];
+  searchResults: IConsumer[] = [];
   selectedCustomer: any = null;
   message: string = '';
 
   // Mock Data (replace with API)
-  customers = [
-    {
-      customerId: 'C12345',
-      consumerNumber: 'CN67890',
-      name: 'John Doe',
-      address: '123 Main Street, City',
-      contact: '9876543210',
-      customerType: 'Residential',
-    },
-  ];
+  customers: IConsumer[] = [];
+
+  ngOnInit() {
+    this.apiService.getAdminAllConsumers().subscribe({
+      next: (value) => {
+        if (typeof value !== 'string') {
+          this.customers = value as IConsumer[];
+          this.searchResults = value as IConsumer[];
+        }
+      },
+    });
+  }
 
   // Search customers
   searchCustomers(event: Event) {
@@ -33,8 +40,10 @@ export class UpdateConsumerComponent {
     this.searchResults = this.customers.filter(
       (customer) =>
         customer.customerId.includes(this.searchQuery) ||
-        customer.consumerNumber.includes(this.searchQuery) ||
-        customer.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        customer.consumerId.includes(this.searchQuery) ||
+        customer.mobileNumber
+          .toLowerCase()
+          .includes(this.searchQuery.toLowerCase())
     );
   }
 
@@ -50,8 +59,19 @@ export class UpdateConsumerComponent {
       (c) => c.customerId === this.selectedCustomer.customerId
     );
     if (index !== -1) {
-      this.customers[index] = { ...this.selectedCustomer };
-      this.message = 'Customer details updated successfully!';
+      console.log('this.selectedCustomer', this.selectedCustomer);
+      this.apiService.updateConsumer(this.selectedCustomer).subscribe({
+        next: (value) => {
+          console.log(value);
+          this.customers[index] = { ...this.selectedCustomer };
+          if (typeof value === 'string') {
+            this.message = value;
+          }
+        },
+        error: (err) => {
+          alert('update fail');
+        },
+      });
       this.selectedCustomer = null; // Exit edit mode
     } else {
       this.message = 'Error updating customer details. Please try again.';
