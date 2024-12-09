@@ -57,8 +57,8 @@ export class ApiService {
 
   payBill(paymentMode: string, billNumbers: string, payableAmount: number) {
     const data = {
-      payableAmount: payableAmount,
-      billNumbers: billNumbers,
+      payableAmount: +payableAmount,
+      billNumber: +billNumbers,
       paymentMode: paymentMode,
     };
     return this.http.post(`${this.baseUrl}/api/pay`, data);
