@@ -68,7 +68,7 @@ export class HomeComponent {
     },
 
     {
-      name: 'View Bill Summary',
+      name: 'Current Bill Summary',
       icon: 'bi-clipboard-check',
       route: '/view-bill-summary',
       role: UserType.CUSTOMER,
