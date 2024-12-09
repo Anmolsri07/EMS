@@ -31,6 +31,10 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/apiAdmin/addNewConsumer`, payload);
   }
 
+  updateConsumer(payload: Partial<IConsumer>) {
+    return this.http.patch(`${this.baseUrl}/apiAdmin/updateConsumer`, payload);
+  }
+
   ///search
   getConsumerByCustomerId(customerId: string) {
     return this.http.get(
@@ -42,6 +46,10 @@ export class ApiService {
     return this.http.get(
       `${this.baseUrl}/apiAdmin/getAllConsumerId/${ConsumersId}`
     );
+  }
+
+  getAdminAllConsumers() {
+    return this.http.get(`${this.baseUrl}/apiAdmin/viewAllConsumers`);
   }
 
   createBill(payload: IBill) {

@@ -27,15 +27,15 @@
         <tr>
           <th>Customer ID</th>
           <th>Consumer Number</th>
-          <th>Name</th>
+          <th>Type</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let customer of searchResults">
           <td>{{ customer.customerId }}</td>
-          <td>{{ customer.consumerNumber }}</td>
-          <td>{{ customer.name }}</td>
+          <td>{{ customer.consumerId }}</td>
+          <td>{{ customer.customerType }}</td>
           <td>
             <button class="btn btn-link" (click)="editCustomer(customer)">
               Edit
@@ -70,22 +70,12 @@
         <input
           type="text"
           class="form-control"
-          [value]="selectedCustomer.consumerNumber"
+          [value]="selectedCustomer.consumerId"
           disabled
         />
       </div>
 
       <!-- Editable Fields -->
-      <div class="mb-3">
-        <label>Full Name</label>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="selectedCustomer.name"
-          name="name"
-          required
-        />
-      </div>
       <div class="mb-3">
         <label>Address</label>
         <textarea
@@ -101,7 +91,7 @@
         <input
           type="text"
           class="form-control"
-          [(ngModel)]="selectedCustomer.contact"
+          [(ngModel)]="selectedCustomer.mobileNumber"
           name="contact"
           pattern="^[0-9]{10}$"
           title="Enter a valid 10-digit phone number"
@@ -114,7 +104,7 @@
           title="customer type"
           class="form-select"
           [(ngModel)]="selectedCustomer.customerType"
-          name="customerType"
+          name="mobileNumber"
           required
         >
           <option value="Residential">Residential</option>
