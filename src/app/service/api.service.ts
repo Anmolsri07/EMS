@@ -29,7 +29,7 @@ export class ApiService {
   ///search
   getConsumerByCustomerId(customerId: string) {
     return this.http.get(
-      `${this.baseUrl}/apiAdmin/getAllConsumers/${customerId}`
+      `${this.baseUrl}/apiAdmin/getAllConsumersWithCustomer/${customerId}`
     );
   }
 

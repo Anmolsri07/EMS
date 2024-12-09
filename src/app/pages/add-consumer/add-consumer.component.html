@@ -27,7 +27,8 @@
         *ngFor="let customer of customers"
         (click)="selectCustomer(customer)"
       >
-        {{ customer.name }} ({{ customer.id }})
+        {{ customer.name }} ({{ customer.customerId }}) (All Consumers number
+        {{ customer.AllConsumers }})
       </li>
     </ul>
   </div>
@@ -117,7 +118,9 @@
       </div>
     </div>
     <div class="d-flex gap-3 mt-5">
-      <button type="button" class="btn btn-warning" (click)="handleBack()">Back</button>
+      <button type="button" class="btn btn-warning" (click)="handleBack()">
+        Back
+      </button>
       <button type="submit" class="btn btn-success">Add Consumer</button>
     </div>
   </form>
