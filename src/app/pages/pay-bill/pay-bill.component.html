@@ -8,6 +8,24 @@
       <form (ngSubmit)="submitPayment()" #paymentForm="ngForm">
         <!-- Card Number -->
         <div class="mb-3">
+          <label for="status" class="form-label">Payment Mode</label>
+          <select
+            class="form-select"
+            id="status"
+            [(ngModel)]="cardDetails.paymentMode"
+            name="paymentStatus"
+            #paymentMode="ngModel"
+            required
+          >
+            <option value="" disabled>Select Status</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="Debit Card">Debit Card</option>
+          </select>
+          <div  *ngIf="paymentMode.invalid && paymentMode.touched" class="text-danger">
+            Payment mode required!
+          </div>
+        </div>
+        <div class="mb-3">
           <label for="cardNumber" class="form-label">Card Number</label>
           <input
             type="text"
@@ -106,7 +124,9 @@
             Submit Payment
           </button>
 
-          <button class="btn btn-warning" type="button" (click)="goBack()">Back</button>
+          <button class="btn btn-warning" type="button" (click)="goBack()">
+            Back
+          </button>
         </div>
       </form>
     </div>

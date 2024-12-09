@@ -22,6 +22,7 @@ export class PayBillComponent {
     expiryDate: '',
     cvv: '',
     cardholderName: '',
+    paymentMode: '',
   };
   totalAmount: number = 1000; // Example amount
   paymentConfirmed: boolean = false;
@@ -72,7 +73,7 @@ export class PayBillComponent {
   // Show the successful payment confirmation
   showPaymentConfirmation(): void {
     this.apiService
-      .payBill('Credit Card', this.billNumber, this.totalAmount)
+      .payBill(this.cardDetails.paymentMode, this.billNumber, this.totalAmount)
       .subscribe({
         next: (value) => {
           alert('Payment Successful!');
