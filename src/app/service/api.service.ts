@@ -48,10 +48,19 @@ export class ApiService {
   }
 
   getAllComplaint(customerId: string) {
-    return this.http.get(`${this.baseUrl}/api/viewComplaint/${customerId}`)
+    return this.http.get(`${this.baseUrl}/api/viewComplaint/${customerId}`);
   }
 
   createComplaint(payload: IComplaint) {
     return this.http.post(`${this.baseUrl}/api/register/complaint`, payload);
+  }
+
+  payBill(paymentMode: string, billNumbers: string, payableAmount: number) {
+    const data = {
+      payableAmount: payableAmount,
+      billNumbers: billNumbers,
+      paymentMode: paymentMode,
+    };
+    return this.http.post(`${this.baseUrl}/api/pay`, data);
   }
 }

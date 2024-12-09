@@ -23,8 +23,8 @@ export class ViewComplaintsComponent {
     const user = JSON.parse(localStorage.getItem('user') as string);
     this.apiService.getAllComplaint(user.customerId).subscribe({
       next: (value) => {
-        if(typeof value !== 'string') {
-          this.complaints = (value as IComplaint[])
+        if (typeof value !== 'string') {
+          this.complaints = value as IComplaint[];
           this.filteredComplaints = value as IComplaint[];
         }
       },
@@ -39,13 +39,12 @@ export class ViewComplaintsComponent {
     event.preventDefault();
 
     this.filteredComplaints = this.complaints.filter((complaint) => {
-      const matchesId =
-        this.complaintId === '' ||
-        complaint.complaintId.toLowerCase().includes(this.complaintId.toLowerCase());
-      const matchesStatus =
-        this.selectedStatus === '' || complaint.status === this.selectedStatus;
-
-      return matchesId && matchesStatus;
+      return (
+        complaint.complaintId
+          .toLowerCase()
+          .includes(this.complaintId.toLowerCase()) ||
+        complaint.status === this.selectedStatus
+      );
     });
   }
 

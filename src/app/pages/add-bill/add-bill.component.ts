@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class AddBillComponent {
   constructor(private apiService: ApiService, private router: Router) { }
-  bill: IBill = {
+  bill: any = {
     consumerId: '',
 
     paymentStatus: 0,

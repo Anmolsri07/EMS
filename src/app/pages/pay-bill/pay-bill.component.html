@@ -21,7 +21,10 @@
             #cardNumber="ngModel"
             placeholder="Enter your card number"
           />
-          <div *ngIf="cardNumber.invalid && cardNumber.touched" class="text-danger">
+          <div
+            *ngIf="cardNumber.invalid && cardNumber.touched"
+            class="text-danger"
+          >
             Card number must be 16 digits.
           </div>
         </div>
@@ -39,7 +42,10 @@
             #expiryDate="ngModel"
             [min]="minExpiryDate"
           />
-          <div *ngIf="expiryDate.invalid && expiryDate.touched" class="text-danger">
+          <div
+            *ngIf="expiryDate.invalid && expiryDate.touched"
+            class="text-danger"
+          >
             Expiry date is required and should not be in the past.
           </div>
         </div>
@@ -77,7 +83,10 @@
             #cardholderName="ngModel"
             placeholder="Enter cardholder's name"
           />
-          <div *ngIf="cardholderName.invalid && cardholderName.touched" class="text-danger">
+          <div
+            *ngIf="cardholderName.invalid && cardholderName.touched"
+            class="text-danger"
+          >
             Cardholder name is required.
           </div>
         </div>
@@ -103,8 +112,14 @@
   <div *ngIf="paymentConfirmed" class="mt-4">
     <h3>Payment Confirmation</h3>
     <p>Are you sure you want to submit the payment?</p>
-    <button class="btn btn-success" (click)="confirmPayment()">Confirm</button>
-    <button class="btn btn-warning" (click)="cancelPayment()">Cancel</button>
+    <div class="d-flex gap-4 aligin-items-center">
+      <button type="button" class="btn btn-success" (click)="confirmPayment()">
+        Confirm
+      </button>
+      <button type="button" class="btn btn-warning" (click)="cancelPayment()">
+        Cancel
+      </button>
+    </div>
   </div>
 
   <!-- Error Handling -->

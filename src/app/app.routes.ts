@@ -50,7 +50,7 @@ export const routes: Routes = [
     canActivate: [userProtectedGuard],
   },
   {
-    path: 'pay-bills',
+    path: 'pay-bills/:billNumber/:amount',
     component: PayBillComponent,
     canActivate: [userProtectedGuard],
   },

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../../service/api.service';
 
 @Component({
   selector: 'app-pay-bill',
@@ -9,6 +11,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './pay-bill.component.scss',
 })
 export class PayBillComponent {
+  constructor(private route: ActivatedRoute, private apiService: ApiService) {}
+
   cardDetails = {
     cardNumber: '',
     expiryDate: '',
@@ -20,6 +24,16 @@ export class PayBillComponent {
   paymentError: boolean = false;
   paymentErrorMessage: string = '';
   minExpiryDate: string = new Date().toISOString().split('T')[0]; // Current month and year
+  billNumber: string = '';
+
+  ngOnInit() {
+    this.route.params.subscribe({
+      next: (value) => {
+        this.totalAmount = value['amount'] as number;
+        this.billNumber = value['billNumber'];
+      },
+    });
+  }
 
   // Submit payment handler
   submitPayment(): void {
@@ -46,8 +60,6 @@ export class PayBillComponent {
 
   // Confirm payment and process
   confirmPayment(): void {
-    // Process payment (e.g., call payment API)
-    // For now, simulate a successful payment
     setTimeout(() => {
       this.showPaymentConfirmation();
     }, 1000);
@@ -55,7 +67,18 @@ export class PayBillComponent {
 
   // Show the successful payment confirmation
   showPaymentConfirmation(): void {
-    alert('Payment Successful!');
+    this.apiService
+    .payBill('Credit Card', this.billNumber, this.totalAmount)
+    .subscribe({
+      next: (value) => {
+          alert('Payment Successful!');
+          console.log(value);
+        },
+        error: ()=> {
+          alert('payment fail')
+        }
+      });
+
     // Navigate to the success page with transaction details
     // Example:
     // this.router.navigate(['/payment-success']);
