@@ -42,10 +42,10 @@
   <div *ngIf="filteredComplaints.length > 0">
     <div class="card mb-3" *ngFor="let complaint of filteredComplaints">
       <div class="card-body">
-        <h5 class="card-title">Complaint ID: {{ complaint.id }}</h5>
+        <h5 class="card-title">Complaint ID: {{ complaint.complaintId }}</h5>
         <p class="card-text">
-          <strong>Submission Date:</strong> {{ complaint.date }}<br />
-          <strong>Type:</strong> {{ complaint.type }}<br />
+          <strong>Submission Date:</strong> {{ complaint.dateRegistered }}<br />
+          <strong>Type:</strong> {{ complaint.complaintType }}<br />
           <strong>Status:</strong> {{ complaint.status }}
         </p>
       </div>

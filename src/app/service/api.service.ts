@@ -47,6 +47,10 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/api/viewBill/${customerId}`);
   }
 
+  getAllComplaint(customerId: string) {
+    return this.http.get(`${this.baseUrl}/api/viewComplaint/${customerId}`)
+  }
+
   createComplaint(payload: IComplaint) {
     return this.http.post(`${this.baseUrl}/api/register/complaint`, payload);
   }

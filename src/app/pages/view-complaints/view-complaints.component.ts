@@ -1,6 +1,8 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ApiService } from '../../service/api.service';
+import { IComplaint } from '../../interfaces/complaint';
 
 @Component({
   selector: 'app-view-complaints',
@@ -9,32 +11,25 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './view-complaints.component.scss',
 })
 export class ViewComplaintsComponent {
-  constructor(private location: Location){}
+  constructor(private location: Location, private apiService: ApiService) {}
   // User input
   complaintId: string = '';
   selectedStatus: string = '';
 
   // Sample complaint data (replace with API data)
-  complaints = [
-    {
-      id: 'C12345',
-      date: '2024-12-01',
-      type: 'Billing Issue',
-      status: 'Pending',
-    },
-    {
-      id: 'C67890',
-      date: '2024-11-25',
-      type: 'Service Interruption',
-      status: 'In Progress',
-    },
-    {
-      id: 'C54321',
-      date: '2024-11-15',
-      type: 'Meter Issue',
-      status: 'Resolved',
-    },
-  ];
+  complaints: IComplaint[] = [];
+
+  ngOnInit() {
+    const user = JSON.parse(localStorage.getItem('user') as string);
+    this.apiService.getAllComplaint(user.customerId).subscribe({
+      next: (value) => {
+        if(typeof value !== 'string') {
+          this.complaints = (value as IComplaint[])
+          this.filteredComplaints = value as IComplaint[];
+        }
+      },
+    });
+  }
 
   // Filtered complaints to display
   filteredComplaints = this.complaints;
@@ -46,7 +41,7 @@ export class ViewComplaintsComponent {
     this.filteredComplaints = this.complaints.filter((complaint) => {
       const matchesId =
         this.complaintId === '' ||
-        complaint.id.toLowerCase().includes(this.complaintId.toLowerCase());
+        complaint.complaintId.toLowerCase().includes(this.complaintId.toLowerCase());
       const matchesStatus =
         this.selectedStatus === '' || complaint.status === this.selectedStatus;
 
@@ -55,6 +50,6 @@ export class ViewComplaintsComponent {
   }
 
   handleBack() {
-    this.location.back()
+    this.location.back();
   }
 }

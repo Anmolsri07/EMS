@@ -29,7 +29,7 @@ export class RegisterComplaintsComponent {
   complaintTypes = ['Billing Issue', 'Power Outage', 'Meter Reading Issue'];
 
   ngOnInit(): void {
-    const user = JSON.parse(localStorage.getItem('user') as string)
+    const user = JSON.parse(localStorage.getItem('user') as string);
     this.apiService.getAllConsumers(user.customerId).subscribe({
       next: (value) => {
         this.consumerIds = value as string[];
@@ -88,10 +88,11 @@ export class RegisterComplaintsComponent {
           alert('Complaint register success ' + value);
           this.location.back();
         },
-        error(err) {
+        error: (err) => {
+          this.isCreating = false;
           alert(JSON.stringify(err));
         },
-        complete: ()=> {
+        complete: () => {
           this.isCreating = false;
         },
       });
