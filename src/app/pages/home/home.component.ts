@@ -10,7 +10,7 @@ import { ICustomers, UserType } from '../../interfaces/users';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  constructor(private readonly router: Router) {}
+  constructor(private readonly router: Router) { }
   public currentUser: ICustomers = JSON.parse(
     localStorage.getItem('user') as string
   );
@@ -66,18 +66,14 @@ export class HomeComponent {
       route: '/bill-history',
       role: UserType.CUSTOMER,
     },
-    {
-      name: 'Complaint Status',
-      icon: 'bi-clipboard-check',
-      route: '/view-complaint-status',
-      role: UserType.CUSTOMER,
-    },
+
     {
       name: 'View Bill Summary',
       icon: 'bi-clipboard-check',
       route: '/view-bill-summary',
       role: UserType.CUSTOMER,
     },
+
     {
       name: 'Registration Complaint',
       icon: 'bi-clipboard-check',
@@ -85,11 +81,17 @@ export class HomeComponent {
       role: UserType.CUSTOMER,
     },
     {
-      name: 'View Complaint History',
+      name: 'Complaint Status',
       icon: 'bi-clipboard-check',
-      route: '/view-complaint-history',
+      route: '/view-complaint-status',
       role: UserType.CUSTOMER,
     },
+    // {
+    //   name: 'View Complaint History',
+    //   icon: 'bi-clipboard-check',
+    //   route: '/view-complaint-history',
+    //   role: UserType.CUSTOMER,
+    // },
     {
       name: 'View Bills',
       icon: 'bi-clipboard-check',
