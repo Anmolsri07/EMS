@@ -86,4 +86,8 @@ export class ApiService {
   getAdminAllBills() {
     return this.http.get(`${this.baseUrl}/apiAdmin/viewBill`);
   }
+
+  getCurrentBillSummary(customer_id: string) {
+    return this.http.get(`${this.baseUrl}/api/currentBillSummary/${customer_id}`);
+  }
 }

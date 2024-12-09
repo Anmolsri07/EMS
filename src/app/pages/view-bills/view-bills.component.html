@@ -51,7 +51,7 @@
               />
             </td> -->
             <td *ngIf="currentUser.role === 'customer'">
-              <button class='btn btn-success' [disabled]="isBillSelected" type="button" (click)="payBill(bill.billNumber, bill.billAmount)">Select</button>
+              <button class='btn btn-success' [disabled]="isBillSelected" type="button" (click)="payBill(bill.billNumber, bill.payableAmount)">Select</button>
             </td>
           </tr>
         </tbody>
