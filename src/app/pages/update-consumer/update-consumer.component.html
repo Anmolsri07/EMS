@@ -4,13 +4,8 @@
   <!-- Search Form -->
   <form class="row g-3 mb-4" (submit)="searchCustomers($event)">
     <div class="col-md-4">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Search by Customer ID, Consumer Number, or Name"
-        [(ngModel)]="searchQuery"
-        name="searchQuery"
-      />
+      <input type="text" class="form-control" placeholder="Search by Customer ID, Consumer Number, or Name"
+        [(ngModel)]="searchQuery" name="searchQuery" />
     </div>
     <div class="col-md-2">
       <div class="d-flex align-items-center gap-3">
@@ -58,55 +53,28 @@
       <!-- Non-editable Fields -->
       <div class="mb-3">
         <label>Customer ID</label>
-        <input
-          type="text"
-          class="form-control"
-          [value]="selectedCustomer.customerId"
-          disabled
-        />
+        <input type="text" class="form-control" [value]="selectedCustomer.customerId" disabled />
       </div>
       <div class="mb-3">
         <label>Consumer Number</label>
-        <input
-          type="text"
-          class="form-control"
-          [value]="selectedCustomer.consumerId"
-          disabled
-        />
+        <input type="text" class="form-control" [value]="selectedCustomer.consumerId" disabled />
       </div>
 
       <!-- Editable Fields -->
       <div class="mb-3">
         <label>Address</label>
-        <textarea
-          class="form-control"
-          [(ngModel)]="selectedCustomer.address"
-          name="address"
-          rows="3"
-          required
-        ></textarea>
+        <textarea class="form-control" [(ngModel)]="selectedCustomer.address" name="address" rows="3"
+          required></textarea>
       </div>
       <div class="mb-3">
         <label>Contact Information</label>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="selectedCustomer.mobileNumber"
-          name="contact"
-          pattern="^[0-9]{10}$"
-          title="Enter a valid 10-digit phone number"
-          required
-        />
+        <input type="text" class="form-control" [(ngModel)]="selectedCustomer.mobileNumber" name="contact"
+          pattern="^[0-9]{10}$" title="Enter a valid 10-digit phone number" required />
       </div>
       <div class="mb-3">
         <label>Customer Type</label>
-        <select
-          title="customer type"
-          class="form-select"
-          [(ngModel)]="selectedCustomer.customerType"
-          name="mobileNumber"
-          required
-        >
+        <select title="customer type" class="form-select" [(ngModel)]="selectedCustomer.customerType"
+          name="mobileNumber" required>
           <option value="Residential">Residential</option>
           <option value="Commercial">Commercial</option>
         </select>
