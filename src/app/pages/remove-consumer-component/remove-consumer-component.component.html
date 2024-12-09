@@ -27,15 +27,15 @@
         <tr>
           <th>Customer ID</th>
           <th>Consumer Number</th>
-          <th>Name</th>
+          <th>Address</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let customer of searchResults">
           <td>{{ customer.customerId }}</td>
-          <td>{{ customer.consumerNumber }}</td>
-          <td>{{ customer.name }}</td>
+          <td>{{ customer.consumerId }}</td>
+          <td>{{ customer.address }}</td>
           <td>
             <button class="btn btn-danger" (click)="deleteCustomer(customer)">
               Delete
@@ -70,21 +70,12 @@
         <input
           type="text"
           class="form-control"
-          [value]="selectedCustomer.consumerNumber"
+          [value]="selectedCustomer.consumerId"
           disabled
         />
       </div>
 
-      <!-- Editable Fields -->
-      <div class="mb-3">
-        <label>Full Name</label>
-        <input
-          type="text"
-          class="form-control"
-          [value]="selectedCustomer.name"
-          disabled
-        />
-      </div>
+
       <div class="mb-3">
         <label>Address</label>
         <textarea
@@ -99,7 +90,7 @@
         <input
           type="text"
           class="form-control"
-          [value]="selectedCustomer.contact"
+          [value]="selectedCustomer.mobileNumber"
           disabled
         />
       </div>

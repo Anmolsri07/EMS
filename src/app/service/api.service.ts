@@ -35,6 +35,12 @@ export class ApiService {
     return this.http.patch(`${this.baseUrl}/apiAdmin/updateConsumer`, payload);
   }
 
+  deleteConsumer(consumerId: string) {
+    return this.http.delete(
+      `${this.baseUrl}/apiAdmin/deleteConsumer/${consumerId}`
+    );
+  }
+
   ///search
   getConsumerByCustomerId(customerId: string) {
     return this.http.get(

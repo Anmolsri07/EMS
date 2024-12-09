@@ -1,6 +1,8 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IConsumer } from '../../interfaces/users';
+import { ApiService } from '../../service/api.service';
 
 @Component({
   selector: 'app-remove-consumer-component',
@@ -9,26 +11,29 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './remove-consumer-component.component.scss',
 })
 export class RemoveConsumerComponentComponent {
-
-  constructor(private location: Location) {}
-
   searchQuery: string = '';
-  searchResults: any[] = [];
+  searchResults: IConsumer[] = [];
   selectedCustomer: any = null;
   message: string = '';
+  customers: IConsumer[] = [];
+
+  constructor(
+    private location: Location,
+    private readonly apiService: ApiService
+  ) {}
+
+  ngOnInit() {
+    this.apiService.getAdminAllConsumers().subscribe({
+      next: (value) => {
+        if (typeof value !== 'string') {
+          this.customers = value as IConsumer[];
+          this.searchResults = value as IConsumer[];
+        }
+      },
+    });
+  }
 
   // Mock Data (replace with API)
-  customers = [
-    {
-      customerId: 'C12345',
-      consumerNumber: 'CN67890',
-      name: 'John Doe',
-      address: '123 Main Street, City',
-      contact: '9876543210',
-      customerType: 'Residential',
-      status: 'Active',
-    },
-  ];
 
   // Search customers
   searchCustomers(event: Event) {
@@ -36,7 +41,7 @@ export class RemoveConsumerComponentComponent {
     this.searchResults = this.customers.filter(
       (customer) =>
         customer.customerId.includes(this.searchQuery) ||
-        customer.consumerNumber.includes(this.searchQuery)
+        customer.consumerId.includes(this.searchQuery)
     );
   }
 
@@ -51,8 +56,23 @@ export class RemoveConsumerComponentComponent {
     const index = this.customers.findIndex(
       (c) => c.customerId === this.selectedCustomer.customerId
     );
+    console.log('this.selectedCustomer', this.selectedCustomer);
+    this.apiService.deleteConsumer(this.selectedCustomer.consumerId).subscribe({
+      next: (value) => {
+        console.log(value);
+        if (typeof value === 'string') {
+          this.message = value;
+          this.ngOnInit();
+          this.selectedCustomer = null;
+        }
+      },
+      error(err) {
+        console.log(err);
+      },
+    });
+    return;
+
     if (index !== -1) {
-      this.customers[index].status = 'Inactive'; // Soft delete
       this.message = 'Customer has been successfully deactivated.';
       this.selectedCustomer = null;
     } else {
