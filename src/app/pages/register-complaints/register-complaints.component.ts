@@ -85,7 +85,7 @@ export class RegisterComplaintsComponent {
       this.isCreating = true;
       this.apiService.createComplaint(this.complaintForm.value).subscribe({
         next: (value) => {
-          alert('Complaint register success' + value);
+          alert('Complaint register success ' + value);
           this.location.back();
         },
         error(err) {

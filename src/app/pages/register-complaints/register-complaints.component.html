@@ -5,8 +5,7 @@
     </div>
     <div class="card-body">
       <form [formGroup]="complaintForm" (ngSubmit)="onSubmit()">
-
-         <div class="mb-4">
+        <div class="mb-4">
           <label for="consumerId" class="form-label">Consumer Id</label>
           <select
             id="consumerId"
@@ -88,7 +87,7 @@
             Description is required and should not exceed 500 characters.
           </div>
         </div>
-<!--
+        <!--
         <div class="mb-4">
           <label class="form-label mx-2">Preferred Contact Method</label>
           <div class="form-check form-check-inline">
@@ -186,7 +185,7 @@
               class="btn btn-success"
               [disabled]="complaintForm.invalid || isCreating"
             >
-              {{isCreating ? 'Loading': 'Submit'}}
+              {{ isCreating ? "Loading" : "Submit" }}
             </button>
             <button
               type="button"
