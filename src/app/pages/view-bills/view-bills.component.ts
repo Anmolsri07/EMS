@@ -4,6 +4,7 @@ import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../service/api.service';
 import { IBill, IViewBill } from '../../interfaces/bills';
+import { UserType } from '../../interfaces/users';
 
 @Component({
   selector: 'app-view-bills',
@@ -17,6 +18,8 @@ export class ViewBillsComponent {
   totalAmount: number = 0;
   isBillSelected: boolean = false;
 
+  currentUser = JSON.parse(localStorage.getItem('user') as string);
+
   constructor(
     private router: Router,
     private location: Location,
@@ -25,16 +28,27 @@ export class ViewBillsComponent {
 
   ngOnInit(): void {
     this.updateTotal();
-    const currentUser = JSON.parse(localStorage.getItem('user') as string);
-    this.apiService.getAllBills(currentUser.customerId).subscribe({
-      next: (value) => {
-        // ?? Avoid returning a plain string when no data is found; it's not a good practice for server responses.
-        if (typeof value !== 'string') {
-          this.bills = value as IBill[];
-          console.log(value);
+    if (this.currentUser.role === UserType.CUSTOMER) {
+      this.apiService.getAllBills(this.currentUser.customerId).subscribe({
+        next: (value) => {
+          // ?? Avoid returning a plain string when no data is found; it's not a good practice for server responses.
+          if (typeof value !== 'string') {
+            this.bills = value as IBill[];
+            console.log(value);
+          }
+        },
+      });
+    } else if (this.currentUser.role === UserType.ADMIN) {
+      this.apiService.getAdminAllBills().subscribe({
+        next: (value)=> {
+          // ?? Avoid returning a plain string when no data is found; it's not a good practice for server responses.
+          if (typeof value !== 'string') {
+            this.bills = value as IBill[];
+            console.log(value);
+          }
         }
-      },
-    });
+      })
+    }
   }
 
   // Update total amount based on selected bills

@@ -63,4 +63,8 @@ export class ApiService {
     };
     return this.http.post(`${this.baseUrl}/api/pay`, data);
   }
+
+  getAdminAllBills() {
+    return this.http.get(`${this.baseUrl}/apiAdmin/viewBill`)
+  }
 }

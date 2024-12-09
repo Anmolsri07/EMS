@@ -16,7 +16,7 @@
             <th>Due bill</th>
             <th>Payable Amount</th>
             <th>Electricity Usage</th>
-            <th>Action</th>
+            <th *ngIf="currentUser.role === 'customer'">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -50,7 +50,7 @@
                 class="form-control"
               />
             </td> -->
-            <td >
+            <td *ngIf="currentUser.role === 'customer'">
               <button class='btn btn-success' [disabled]="isBillSelected" type="button" (click)="payBill(bill.billNumber, bill.billAmount)">Select</button>
             </td>
           </tr>
