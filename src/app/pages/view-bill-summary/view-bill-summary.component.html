@@ -1,0 +1,45 @@
+<div class="container mt-5">
+  <div *ngIf="bill !== null" class="card p-4 shadow-sm" style="max-width: 400px; margin: auto; border: 1px solid #ddd;">
+    <div class="text-center mb-3">
+      <h4>Electricity Bill</h4>
+      <hr />
+    </div>
+    <div class="mb-2">
+      <strong>Bill Number:</strong>
+      <span>{{ bill.billNumber }}</span>
+    </div>
+    <div class="mb-2">
+      <strong>Consumer ID:</strong>
+      <span>{{ bill.consumerId }}</span>
+    </div>
+    <div class="mb-2">
+      <strong>Bill Date:</strong>
+      <span>{{ bill.billDate | date: 'yyyy-MM-dd' }}</span>
+    </div>
+    <div class="mb-2">
+      <strong>Due Date:</strong>
+      <span>{{ bill.dueDate | date: 'yyyy-MM-dd' }}</span>
+    </div>
+    <div class="mb-2">
+      <strong>Electricity Usage:</strong>
+      <span>{{ bill.electricityUsage }} kWh</span>
+    </div>
+    <div class="mb-2">
+      <strong>Bill Amount:</strong>
+      <span>&#8377; {{ bill.billAmount | number: '1.2-2' }}</span>
+    </div>
+    <div class="mb-2">
+      <strong>Payable Amount:</strong>
+      <span>&#8377; {{ bill.payableAmount | number: '1.2-2' }}</span>
+    </div>
+    <div class="mb-2">
+      <strong>Payment Status:</strong>
+      <span [class.text-success]="bill.paymentStatus === 1" [class.text-danger]="bill.paymentStatus === 0">
+        {{ bill.paymentStatus === 1 ? 'Paid' : 'Unpaid' }}
+      </span>
+    </div>
+    <div class="text-center mt-4">
+      <button class="btn btn-primary" *ngIf="bill.paymentStatus === 0" (click)="handlePay(bill.billNumber, bill.payableAmount)">Pay Now</button>
+    </div>
+  </div>
+</div>

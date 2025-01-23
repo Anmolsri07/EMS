@@ -1,0 +1,64 @@
+<div class="container my-5" style="min-height: 90vh;">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header text-center bg-dark text-white">
+          <h3>Login</h3>
+        </div>
+        <div class="card-body">
+          <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+            <div class="mb-3">
+              <label for="userType" class="form-label">User Type</label>
+              <select
+                class="form-select"
+                id="userType"
+                required
+                [(ngModel)]="userType"
+                name="userType"
+              >
+                <option value="admin">Admin</option>
+                <option value="customer">Customer</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="username" class="form-label">UserId</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                required
+                placeholder="Enter username"
+                [(ngModel)]="userId"
+                name="userId"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Enter password"
+                id="password"
+                required
+                [(ngModel)]="password"
+                name="password"
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-dark w-100"
+              [disabled]="isCreating"
+            >
+              {{ isCreating ? "Loading" : "Login" }}
+            </button>
+            <div class="text-center w-100 my-3">
+              <a [routerLink]="'/customer-registration'" class="btn"
+                >Create a new customer account?</a
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

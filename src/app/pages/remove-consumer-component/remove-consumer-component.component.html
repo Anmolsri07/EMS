@@ -1,0 +1,123 @@
+<div class="container py-4">
+  <h2 class="mb-4">Remove Consumer Details</h2>
+
+  <!-- Search Form -->
+  <form class="row g-3 mb-4" (submit)="searchCustomers($event)">
+    <div class="col-md-6">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by Customer ID or Consumer Number"
+        [(ngModel)]="searchQuery"
+        name="searchQuery"
+      />
+    </div>
+    <div class="col-md-2">
+      <div class="d-flex gap-3">
+        <button type="submit" class="btn btn-primary w-100">Search</button>
+        <button type="button" class="btn btn-warning" (click)="handleBack()">Back</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Search Results -->
+  <div *ngIf="searchResults.length > 0" class="table-responsive">
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>Customer ID</th>
+          <th>Consumer Number</th>
+          <th>Address</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of searchResults">
+          <td>{{ customer.customerId }}</td>
+          <td>{{ customer.consumerId }}</td>
+          <td>{{ customer.address }}</td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteCustomer(customer)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- No Results Found -->
+  <p *ngIf="searchResults.length === 0" class="text-muted">
+    No customers found. Please try again.
+  </p>
+
+  <!-- Delete Consumer Form -->
+  <div *ngIf="selectedCustomer" class="card p-4">
+    <h3>Delete Consumer Details</h3>
+    <form (submit)="confirmDelete($event)">
+      <!-- Non-editable Fields -->
+      <div class="mb-3">
+        <label>Customer ID</label>
+        <input
+          type="text"
+          class="form-control"
+          [value]="selectedCustomer.customerId"
+          disabled
+        />
+      </div>
+      <div class="mb-3">
+        <label>Consumer Number</label>
+        <input
+          type="text"
+          class="form-control"
+          [value]="selectedCustomer.consumerId"
+          disabled
+        />
+      </div>
+
+
+      <div class="mb-3">
+        <label>Address</label>
+        <textarea
+          class="form-control"
+          [value]="selectedCustomer.address"
+          rows="3"
+          disabled
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <label>Contact Information</label>
+        <input
+          type="text"
+          class="form-control"
+          [value]="selectedCustomer.mobileNumber"
+          disabled
+        />
+      </div>
+      <div class="mb-3">
+        <label>Customer Type</label>
+        <input
+          type="text"
+          class="form-control"
+          [value]="selectedCustomer.customerType"
+          disabled
+        />
+      </div>
+
+      <!-- Confirmation Prompt -->
+      <div class="alert alert-warning">
+        Are you sure you want to remove this customer? This action cannot be
+        undone.
+      </div>
+
+      <!-- Buttons -->
+      <button type="submit" class="btn btn-danger me-3">Delete</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelDelete()">
+        Back
+      </button>
+    </form>
+  </div>
+
+  <!-- Feedback Messages -->
+  <div *ngIf="message" class="alert alert-info mt-4">{{ message }}</div>
+</div>

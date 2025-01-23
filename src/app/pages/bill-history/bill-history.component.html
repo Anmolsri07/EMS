@@ -1,0 +1,106 @@
+<!-- bill-history.component.html -->
+<div class="container my-5">
+  <h2 class="text-center">Your Electricity Bill History</h2>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <!-- Main Content -->
+  <div *ngIf="!errorMessage">
+    <!-- Date Range Picker -->
+    <div class="d-flex justify-content-between mb-3">
+      <div class="form-group">
+        <label for="startDate">Start Date</label>
+        <input
+          type="date"
+          id="startDate"
+          class="form-control"
+          [formControl]="startDate"
+        />
+      </div>
+      <div class="form-group">
+        <label for="endDate">End Date</label>
+        <input
+          type="date"
+          id="endDate"
+          class="form-control"
+          [formControl]="endDate"
+        />
+      </div>
+      <button
+        class="btn btn-primary align-self-end mt-4"
+        (click)="fetchBills()"
+      >
+        Apply Date Range
+      </button>
+    </div>
+
+    <!-- Payment Status Filter -->
+    <div class="form-group mb-3">
+      <label for="paymentStatus">Filter by Payment Status</label>
+      <select
+        id="paymentStatus"
+        class="form-control"
+        [(ngModel)]="paymentStatusFilter"
+        (change)="filterBills()"
+      >
+        <option value="">All</option>
+        <option value="Paid">Paid</option>
+        <option value="Unpaid">Unpaid</option>
+      </select>
+    </div>
+
+    <!-- Table for Bill History -->
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th (click)="sortBills('billDate')" style="cursor: pointer">
+            Bill Date
+          </th>
+          <th (click)="sortBills('billingPeriod')" style="cursor: pointer">
+            Billing Period
+          </th>
+          <th (click)="sortBills('dueDate')" style="cursor: pointer">
+            Due Date
+          </th>
+          <th (click)="sortBills('billAmount')" style="cursor: pointer">
+            Bill Amount
+          </th>
+          <th>Payment Status</th>
+          <th>Payment Date</th>
+          <th>Mode of Payment</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bill of filteredBills">
+          <td>{{ bill.billDate | date }}</td>
+          <td>{{ bill.billingPeriod }}</td>
+          <td>{{ bill.dueDate | date }}</td>
+          <td>{{ bill.billAmount | currency }}</td>
+          <td>{{ bill.paymentStatus }}</td>
+          <td>{{ bill.paymentDate | date }}</td>
+          <td>{{ bill.modeOfPayment }}</td>
+          <td>
+            <button class="btn btn-link" (click)="downloadBill(bill.id)">
+              Download Bill
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- No Data Handling -->
+    <div *ngIf="filteredBills.length === 0" class="alert alert-warning">
+      No billing data found for the selected range.
+    </div>
+
+    <!-- Total Amount Section -->
+    <div class="d-flex align-items-center justify-content-between">
+      <button type="button" class="btn btn-warning" (click)="handleBack()">Back</button>
+      <div *ngIf="filteredBills.length > 0">
+        <h4>Total Bill Amount: {{ totalAmount | currency }}</h4>
+      </div>
+    </div>
+  </div>
+</div>
